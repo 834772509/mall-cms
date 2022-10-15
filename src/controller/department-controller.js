@@ -34,14 +34,14 @@ class DepartmentController {
   }
 
   // 获取某个部门信息
-  async getDepartmentInfo(ctx, next) {
+  async detail(ctx, next) {
     const { departmentId } = ctx.params;
     const result = await departmentService.getDepartmentById(departmentId);
     ctx.body = { code: 0, data: result[0] };
   }
 
   // 编辑部门信息
-  async updateDepartmentInfo(ctx, next) {
+  async update(ctx, next) {
     const { departmentId } = ctx.params;
     const { leader, parentId } = ctx.request.body;
     const result = await departmentService.update(
@@ -56,7 +56,7 @@ class DepartmentController {
   }
 
   // 删除部门
-  async deleteDepartment(ctx, next) {
+  async remove(ctx, next) {
     const { departmentId } = ctx.params;
     const result = await departmentService.remove(departmentId);
     ctx.body = {

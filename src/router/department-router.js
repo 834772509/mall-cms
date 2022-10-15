@@ -3,9 +3,9 @@ const { verifyAuth } = require("../middleware/auth-middleware");
 const {
   create,
   list,
-  getDepartmentInfo,
-  updateDepartmentInfo,
-  deleteDepartment,
+  detail,
+  update,
+  remove,
 } = require("../controller/department-controller");
 
 const departmentRouter = new Router({ prefix: "/department" });
@@ -15,11 +15,10 @@ departmentRouter.post("/", verifyAuth, create);
 // 获取部门列表
 departmentRouter.post("/list", verifyAuth, list);
 // 获取某个部门信息
-departmentRouter.get("/:departmentId", verifyAuth, getDepartmentInfo);
+departmentRouter.get("/:departmentId", verifyAuth, detail);
 // 更新部门信息
-departmentRouter.patch("/:departmentId", verifyAuth, updateDepartmentInfo);
-
+departmentRouter.patch("/:departmentId", verifyAuth, update);
 // 删除部门
-departmentRouter.delete("/:departmentId", verifyAuth, deleteDepartment);
+departmentRouter.delete("/:departmentId", verifyAuth, remove);
 
 module.exports = departmentRouter;
