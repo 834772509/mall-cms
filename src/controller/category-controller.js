@@ -1,7 +1,7 @@
 const categoryService = require("../service/category-service");
 
 // 商品类别模块
-class DepartmentController {
+class CategoryController {
   // 创建类别
   async create(ctx, next) {
     // 获取用户请求传递的参数
@@ -57,4 +57,4 @@ class DepartmentController {
   }
 }
 
-module.exports = new DepartmentController();
+module.exports = new CategoryController();

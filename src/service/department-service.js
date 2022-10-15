@@ -20,7 +20,7 @@ class DepartmentService {
   /**
    * 获取部门列表
    */
-  async getDepartmentList(name = "", leader = "", offset, size) {
+  async getDepartmentList(name = "", leader = "", offset = 0, size = 10) {
     const statement = `SELECT SQL_CALC_FOUND_ROWS * FROM department WHERE name LIKE ? AND leader LIKE ? LIMIT ?,?`;
     const result = await connection.execute(statement, [
       `%${name}%`,

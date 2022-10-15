@@ -39,7 +39,7 @@ const errorHandler = (error, ctx) => {
       break;
   }
   ctx.status = status;
-  ctx.body = message;
+  ctx.body = { code: status, message: message };
 };
 
 module.exports = errorHandler;

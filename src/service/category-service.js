@@ -16,7 +16,7 @@ class categoryService {
   /**
    * 获取类别列表
    */
-  async list(name = "", offset, size) {
+  async list(name = "", offset = 0, size = 10) {
     const statement = `SELECT SQL_CALC_FOUND_ROWS * FROM category WHERE name LIKE ? LIMIT ?,?`;
     const result = await connection.execute(statement, [
       `%${name}%`,
