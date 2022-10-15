@@ -1,0 +1,46 @@
+{
+  "name": "mall_cms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js",
+    "build": "pkg .",
+    "commit": "cz && git push"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^7.14.0",
+    "jimp": "^0.16.1",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-multer": "^1.0.2",
+    "koa-router": "^10.0.0",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.6"
+  },
+  "devDependencies": {
+    "commitizen": "^4.2.5",
+    "cz-customizable": "^7.0.0",
+    "pkg": "^5.8.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "bin": "src/index.js",
+  "pkg": {
+    "scripts": "src/**/*.js",
+    "assets": [
+      "src/app/keys"
+    ],
+    "targets": [
+      "win"
+    ],
+    "outputPath": "dist"
+  }
+}
