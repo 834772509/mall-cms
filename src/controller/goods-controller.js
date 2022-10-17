@@ -42,6 +42,55 @@ class GoodsController {
     ctx.body = { code: 0, data: result[0] };
   }
 
+  // 每个分类商品的个数
+  async categoryCount(ctx, next) {
+    const result = await goodsService.getCategoryCount();
+    ctx.body = {
+      code: 0,
+      data: result[0],
+    };
+  }
+  // 每个分类商品的销量
+  async categorySale(ctx, next) {
+    const result = await goodsService.getCategorySale();
+    ctx.body = {
+      code: 0,
+      data: result[0],
+    };
+  }
+  // 每个分类商品的收藏
+  async categoryFavor(ctx, next) {
+    const result = await goodsService.getCategoryFavor();
+    ctx.body = {
+      code: 0,
+      data: result[0],
+    };
+  }
+  // 销量前10的商品数量
+  async saleTopTen(ctx, next) {
+    const result = await goodsService.getSaleTopTen();
+    ctx.body = {
+      code: 0,
+      data: result[0],
+    };
+  }
+  // 不同城市的销量数据
+  async addresSale(ctx, next) {
+    const result = await goodsService.getAddresSale();
+    ctx.body = {
+      code: 0,
+      data: result[0],
+    };
+  }
+  // 商品数据统计的数量
+  async amountList(ctx, next) {
+    const result = await goodsService.getAmountList();
+    ctx.body = {
+      code: 0,
+      data: result,
+    };
+  }
+
   // 编辑商品信息
   async update(ctx, next) {
     const { goodsId } = ctx.params;

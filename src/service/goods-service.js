@@ -49,6 +49,93 @@ class GoodsService {
     return [result[0], totalCount[0][0]["FOUND_ROWS()"]];
   }
 
+  // 每个分类商品的个数
+  async getCategoryCount() {
+    const statement = `SELECT category.id,category.name,count(*) goodsCount FROM category RIGHT JOIN goods ON category.id = goods.categoryId group by categoryId`;
+    const result = await connection.execute(statement, []);
+    return result;
+  }
+  // 每个分类商品的销量
+  async getCategorySale() {
+    const statement = `SELECT category.id,category.name,sum(goods.saleCount) goodsCount FROM category RIGHT JOIN goods ON category.id = goods.categoryId group by categoryId`;
+    const result = await connection.execute(statement, []);
+    return result;
+  }
+  // 每个分类商品的收藏
+  async getCategoryFavor() {
+    const statement = `SELECT category.id,category.name,sum(goods.favorCount) goodsFavor FROM category RIGHT JOIN goods ON category.id = goods.categoryId group by categoryId`;
+    const result = await connection.execute(statement, []);
+    return result;
+  }
+  // 销量前10的商品数量
+  async getSaleTopTen() {
+    const statement = `SELECT id,name,saleCount FROM goods ORDER BY saleCount desc limit 10`;
+    const result = await connection.execute(statement, []);
+    return result;
+  }
+  // 不同城市的销量数据
+  async getAddresSale() {
+    const statement = `SELECT address,sum(saleCount) count FROM goods GROUP BY address`;
+    const result = await connection.execute(statement, []);
+    return result;
+  }
+  // 商品数据统计的数量
+  async getAmountList() {
+    const saleCountStatement = `SELECT sum(saleCount) count FROM goods`;
+    const saleCountResult = await connection.execute(saleCountStatement, []);
+
+    const favorCountStatement = `SELECT sum(favorCount) count FROM goods`;
+    const favorCountResult = await connection.execute(favorCountStatement, []);
+
+    const inventoryCountStatement = `SELECT sum(inventoryCount) count FROM goods`;
+    const inventoryCountResult = await connection.execute(
+      inventoryCountStatement,
+      []
+    );
+
+    // const saleroomCountStatement = `SELECT sum(saleroomCount) count FROM goods`;
+    // const saleroomCountResult = await connection.execute(
+    //   saleroomCountStatement,
+    //   []
+    // );
+
+    const result = [
+      {
+        amount: "sale",
+        title: "商品总销量",
+        tips: "所有商品的总销量",
+        subtitle: "商品总销量",
+        number1: Number(saleCountResult[0][0]["count"]),
+        number2: Number(saleCountResult[0][0]["count"]),
+      },
+      {
+        amount: "favor",
+        title: "商品总收藏",
+        tips: "所有商品的总收藏",
+        subtitle: "商品总收藏",
+        number1: Number(favorCountResult[0][0]["count"]),
+        number2: Number(favorCountResult[0][0]["count"]),
+      },
+      {
+        amount: "inventory",
+        title: "商品总库存",
+        tips: "所有商品的总库存",
+        subtitle: "商品总库存",
+        number1: Number(inventoryCountResult[0][0]["count"]),
+        number2: Number(inventoryCountResult[0][0]["count"]),
+      },
+      {
+        amount: "saleroom",
+        title: "商品总销售额",
+        tips: "所有商品的总销售额",
+        subtitle: "商品总销售额",
+        number1: 43118530,
+        number2: 43118530,
+      },
+    ];
+
+    return result;
+  }
   /**
    * 更新商品信息
    */
