@@ -1,4 +1,5 @@
 const connection = require("../app/database");
+const { getMenuTreeList } = require("../utils/utils");
 
 class menuService {
   /**
@@ -23,7 +24,7 @@ class menuService {
   /**
    * 获取菜单信息-通过ID
    */
-  async getmenuById(id) {
+  async getMenuById(id) {
     const statement = `SELECT * FROM menu WHERE id = ?`;
     const result = await connection.execute(statement, [id]);
     return result[0];
@@ -35,26 +36,7 @@ class menuService {
   async list() {
     const statement = `SELECT * FROM menu`;
     const result = await connection.execute(statement, []);
-
-    const getTreeList = (treeData, id, list) => {
-      for (const item of treeData) {
-        if (item.parentId === id) {
-          list.push(item);
-        }
-      }
-      createChildren(treeData, list);
-      return list;
-    };
-    const createChildren = (treeData, list) => {
-      for (const i of list) {
-        i.children = [];
-        getTreeList(treeData, i.id, i.children);
-        if (i.children.length === 0) {
-          delete i.children;
-        }
-      }
-    };
-    const res = getTreeList(result[0], 0, []);
+    const res = getMenuTreeList(result[0], 0, []);
     return [res];
   }
 

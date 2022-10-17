@@ -20,13 +20,7 @@ class MenuController {
   // 查询菜单列表
   async list(ctx, next) {
     // 获取数据
-    const { name, intro, offset, size } = ctx.request.body;
-    const [result, totalCount] = await menuService.list(
-      name,
-      intro,
-      offset,
-      size
-    );
+    const [result, totalCount] = await menuService.list();
     ctx.body = {
       code: 0,
       data: { list: result, totalCount: totalCount },
@@ -36,7 +30,7 @@ class MenuController {
   // 获取某个菜单信息
   async detail(ctx, next) {
     const { menuId } = ctx.params;
-    const result = await menuService.getmenuById(menuId);
+    const result = await menuService.getMenuById(menuId);
     ctx.body = { code: 0, data: result[0] };
   }
 
