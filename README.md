@@ -35,7 +35,16 @@
 └─package.json 项目配置文件
 ```
 
+### 项目接口
+
+PostMan 配置文件: [mall_cms.json](mall_cms.postman_collection.json)
+
 ## 使用
+
+### 配置数据库
+
+1. 创建数据库: `mall_cms`
+2. 导入数据文件: [mall_cms.sql](mall_cms.sql)
 
 ### 配置项目
 

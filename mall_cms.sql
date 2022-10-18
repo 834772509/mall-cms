@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : MySQL
  Source Server Type    : MySQL
  Source Server Version : 80012
  Source Host           : localhost:3306
- Source Schema         : coderhub
+ Source Schema         : mall_cms
 
  Target Server Type    : MySQL
  Target Server Version : 80012
  File Encoding         : 65001
 
- Date: 10/12/2020 10:58:39
+ Date: 18/10/2022 09:30:27
 */
 
 SET NAMES utf8mb4;
@@ -27,12 +27,12 @@ CREATE TABLE `avatar`  (
   `mimetype` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `size` int(11) NULL DEFAULT NULL,
   `user_id` int(11) NULL DEFAULT NULL,
-  `createAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
-  `updateAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updateAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `filename`(`filename`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of avatar
@@ -44,72 +44,48 @@ INSERT INTO `avatar` VALUES (4, '99368740e21d2d50f1eb0b1b2a55dd8e', 'image/png',
 INSERT INTO `avatar` VALUES (5, '1030747df679bbd152581c37999b58d7', 'image/png', 682721, 2, '2020-12-03 16:58:01', '2020-12-03 16:58:01');
 
 -- ----------------------------
--- Table structure for brand
+-- Table structure for category
 -- ----------------------------
-DROP TABLE IF EXISTS `brand`;
-CREATE TABLE `brand`  (
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `website` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `phoneRank` int(11) NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `createAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updateAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of brand
+-- Records of category
 -- ----------------------------
-INSERT INTO `brand` VALUES (2, '苹果', 'www.apple.com', 10);
-INSERT INTO `brand` VALUES (3, '小米', 'www.mi.com', 5);
-INSERT INTO `brand` VALUES (4, 'oppo', 'www.oppo.com', 12);
-INSERT INTO `brand` VALUES (5, '京东', 'www.jd.com', 8);
-INSERT INTO `brand` VALUES (6, 'Google', 'www.google.com', 9);
-INSERT INTO `brand` VALUES (100, '华为', 'www.huawei.com', 2);
+INSERT INTO `category` VALUES (7, '床上用品', '2022-10-17 17:10:16', '2022-10-18 09:18:11');
+INSERT INTO `category` VALUES (8, '女装', '2022-10-17 17:10:16', '2022-10-17 17:10:16');
+INSERT INTO `category` VALUES (6, '家具', '2022-10-17 17:10:16', '2022-10-17 17:10:16');
+INSERT INTO `category` VALUES (5, '厨具', '2022-10-17 17:10:16', '2022-10-17 17:10:16');
+INSERT INTO `category` VALUES (4, '鞋子', '2022-10-17 17:10:16', '2022-10-17 17:10:16');
+INSERT INTO `category` VALUES (3, '裤子', '2022-10-17 17:10:16', '2022-10-17 17:10:16');
+INSERT INTO `category` VALUES (2, '上衣', '2022-10-17 17:10:16', '2022-10-17 17:10:16');
 
 -- ----------------------------
--- Table structure for comment
+-- Table structure for department
 -- ----------------------------
-DROP TABLE IF EXISTS `comment`;
-CREATE TABLE `comment`  (
+DROP TABLE IF EXISTS `department`;
+CREATE TABLE `department`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `moment_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `comment_id` int(11) NULL DEFAULT NULL,
-  `createAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
-  `updateAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `moment_id`(`moment_id`) USING BTREE,
-  INDEX `user_id`(`user_id`) USING BTREE,
-  INDEX `comment_id`(`comment_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of comment
--- ----------------------------
-INSERT INTO `comment` VALUES (1, '我说错了，C语言才是最好的语言', 1, 2, NULL, '2020-11-29 15:53:59', '2020-11-29 20:55:30');
-INSERT INTO `comment` VALUES (3, '前端学习最重要的是HTML+CSS+JavaScript', 1, 2, NULL, '2020-12-01 16:01:06', '2020-12-01 16:01:06');
-INSERT INTO `comment` VALUES (4, 'Vue、React也是非常重要~', 1, 2, 3, '2020-12-01 16:02:54', '2020-12-01 16:02:54');
-
--- ----------------------------
--- Table structure for courses
--- ----------------------------
-DROP TABLE IF EXISTS `courses`;
-CREATE TABLE `courses`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `price` double NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `parentId` int(11) NULL DEFAULT NULL,
+  `createAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updateAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `leader` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of courses
+-- Records of department
 -- ----------------------------
-INSERT INTO `courses` VALUES (1, '英语', 100);
-INSERT INTO `courses` VALUES (2, '语文', 666);
-INSERT INTO `courses` VALUES (3, '数学', 888);
-INSERT INTO `courses` VALUES (4, '历史', 80);
-INSERT INTO `courses` VALUES (5, '地理', 888);
-INSERT INTO `courses` VALUES (6, '物理', 233);
+INSERT INTO `department` VALUES (1, '人事部', 1, '2022-10-11 07:05:52', '2022-10-11 07:05:52', 'lily');
+INSERT INTO `department` VALUES (2, '客服部', 2, '2022-10-11 07:06:09', '2022-10-11 07:06:09', 'lily');
+INSERT INTO `department` VALUES (8, '营销部', 2, '2022-10-11 16:32:52', '2022-10-11 16:37:46', 'lily');
 
 -- ----------------------------
 -- Table structure for file
@@ -122,13 +98,13 @@ CREATE TABLE `file`  (
   `size` int(11) NULL DEFAULT NULL,
   `moment_id` int(11) NULL DEFAULT NULL,
   `user_id` int(11) NULL DEFAULT NULL,
-  `createAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
-  `updateAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updateAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `filename`(`filename`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   INDEX `moment_id`(`moment_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of file
@@ -137,263 +113,296 @@ INSERT INTO `file` VALUES (3, '1cba08086681b58cc4310d673904d508', 'image/png', 6
 INSERT INTO `file` VALUES (4, '28d64f74ce75ac56b435e6d7bafb8cbc', 'image/jpeg', 602136, 1, 2, '2020-12-03 18:26:50', '2020-12-03 18:26:50');
 
 -- ----------------------------
--- Table structure for label
+-- Table structure for goods
 -- ----------------------------
-DROP TABLE IF EXISTS `label`;
-CREATE TABLE `label`  (
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE `goods`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `createAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
-  `updateAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of label
--- ----------------------------
-INSERT INTO `label` VALUES (1, '前端', '2020-12-01 17:29:38', '2020-12-01 17:29:38');
-INSERT INTO `label` VALUES (2, '文学', '2020-12-01 17:32:08', '2020-12-01 17:32:08');
-INSERT INTO `label` VALUES (3, '爱情', '2020-12-01 17:32:11', '2020-12-01 17:32:11');
-INSERT INTO `label` VALUES (4, '青春', '2020-12-01 17:32:15', '2020-12-01 17:32:15');
-INSERT INTO `label` VALUES (5, '编程', '2020-12-01 19:39:31', '2020-12-01 19:39:31');
-INSERT INTO `label` VALUES (6, '开发语言', '2020-12-01 19:39:31', '2020-12-01 19:39:31');
-INSERT INTO `label` VALUES (7, 'C语言', '2020-12-01 19:39:31', '2020-12-01 19:39:31');
-
--- ----------------------------
--- Table structure for moment
--- ----------------------------
-DROP TABLE IF EXISTS `moment`;
-CREATE TABLE `moment`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `createAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
-  `updateAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `user_id`(`user_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of moment
--- ----------------------------
-INSERT INTO `moment` VALUES (1, '我说错了，C语言才是最好的语言', 1, '2020-11-24 18:22:54', '2020-11-29 16:25:41');
-INSERT INTO `moment` VALUES (2, '曾几何时，他也好，她也好，都是这家伙的被害者。所以我才憎恶着。这个强求着所谓“大家”的世界。必须建立在牺牲某人之上才能成立的低劣的和平。以温柔和正义粉饰，明明是恶毒之物却登大雅之堂，随着时间的流逝越发凶恶，除欺瞒外别无其二的空虚的概念。过去和世界都是无法改变的。发生过的事情和所谓的“大家”都是无法改变的。但是，并不是说自己只能隶属于他们', 1, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (3, '不要告诉我你不需要保护，不要告诉我你不寂寞，知微，我只希望你，在走过黑夜的那个时辰，不要倔强的选择一个人。', 3, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (4, 'If you shed tears when you miss the sun, you also miss the stars.如果你因失去了太阳而流泪，那么你也将失去群星了。', 1, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (5, 'JavaScript 是世界上最好的语言', 2, '2020-11-24 18:27:42', '2020-11-28 17:17:28');
-INSERT INTO `moment` VALUES (6, '某一天，突然发现，许多结果都与路径无关。', 4, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (8, '翅膀长在你的肩上，太在乎别人对于飞行姿势的批评，所以你飞不起来', 4, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (9, '一个人至少拥有一个梦想，有一个理由去坚强。心若没有栖息的地方，到哪里都是在流浪。', 2, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (10, '不乱于心，不困于情。不畏将来，不念过往。如此，安好。', 3, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (11, '如果你给我的，和你给别人的是一样的，那我就不要了。', 3, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (12, '故事的开头总是这样，适逢其会，猝不及防。故事的结局总是这样，花开两朵，天各一方。', 2, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (13, '你不愿意种花，你说，我不愿看见它一点点凋落。是的，为了避免结束，你避免了一切开始。', 2, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (14, '你如果认识从前的我，也许你会原谅现在的我。', 4, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (15, '每一个不曾起舞的日子，都是对生命的辜负。', 2, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (16, '向来缘浅，奈何情深。', 2, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (17, '心之所向 素履以往 生如逆旅 一苇以航', 3, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (18, '生如夏花之绚烂，死如秋叶之静美。', 3, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (19, '答案很长，我准备用一生的时间来回答，你准备要听了吗？', 4, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (20, '因为爱过，所以慈悲；因为懂得，所以宽容。', 4, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (21, '我们听过无数的道理，却仍旧过不好这一生。', 1, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-INSERT INTO `moment` VALUES (22, '我来不及认真地年轻，待明白过来时，只能选择认真地老去。', 2, '2020-11-24 18:27:42', '2020-11-24 18:27:42');
-
--- ----------------------------
--- Table structure for moment_label
--- ----------------------------
-DROP TABLE IF EXISTS `moment_label`;
-CREATE TABLE `moment_label`  (
-  `moment_id` int(11) NOT NULL,
-  `label_id` int(11) NOT NULL,
-  `createAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
-  `updateAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`moment_id`, `label_id`) USING BTREE,
-  INDEX `label_id`(`label_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Fixed;
-
--- ----------------------------
--- Records of moment_label
--- ----------------------------
-INSERT INTO `moment_label` VALUES (5, 5, '2020-12-01 20:04:46', '2020-12-01 20:04:46');
-INSERT INTO `moment_label` VALUES (5, 6, '2020-12-01 20:04:46', '2020-12-01 20:04:46');
-INSERT INTO `moment_label` VALUES (5, 7, '2020-12-01 20:04:46', '2020-12-01 20:04:46');
-
--- ----------------------------
--- Table structure for products
--- ----------------------------
-DROP TABLE IF EXISTS `products`;
-CREATE TABLE `products`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `brand` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `price` double NOT NULL,
-  `score` decimal(2, 1) NULL DEFAULT NULL,
-  `voteCnt` int(11) NULL DEFAULT NULL,
-  `url` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `pid` int(11) NULL DEFAULT NULL,
-  `brand_id` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `brand_id`(`brand_id`) USING BTREE,
-  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 109 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of products
--- ----------------------------
-INSERT INTO `products` VALUES (1, '华为', '华为nova 3（全网通） ', 3688, 6.7, 65, 'http://detail.zol.com.cn/cell_phone/index1185512.shtml', 1185512, 100);
-INSERT INTO `products` VALUES (2, '华为', '华为P20 Pro（6GB RAM/全网通） ', 4488, 8.3, 103, 'http://detail.zol.com.cn/cell_phone/index1207038.shtml', 1207038, 100);
-INSERT INTO `products` VALUES (3, '华为', '华为P20（全网通） ', 3388, 8.4, 127, 'http://detail.zol.com.cn/cell_phone/index1175779.shtml', 1175779, 100);
-INSERT INTO `products` VALUES (4, '华为', '华为nova 3i（4GB RAM/全网通） ', 1999, 7.0, 9, 'http://detail.zol.com.cn/cell_phone/index1222100.shtml', 1222100, 100);
-INSERT INTO `products` VALUES (5, '华为', '华为Mate 10（4GB RAM/全网通） ', 3399, 8.3, 125, 'http://detail.zol.com.cn/cell_phone/index1165672.shtml', 1165672, 100);
-INSERT INTO `products` VALUES (6, '华为', '华为nova 3e（全网通） ', 1999, 8.8, 71, 'http://detail.zol.com.cn/cell_phone/index1207608.shtml', 1207608, 100);
-INSERT INTO `products` VALUES (7, '华为', '华为nova 2s（4GB RAM/全网通） ', 2399, 7.5, 97, 'http://detail.zol.com.cn/cell_phone/index1204363.shtml', 1204363, 100);
-INSERT INTO `products` VALUES (8, '华为', '华为Mate 10 Pro（全网通） ', 3599, 8.7, 92, 'http://detail.zol.com.cn/cell_phone/index1181128.shtml', 1181128, 100);
-INSERT INTO `products` VALUES (9, '华为', '华为畅享8（3GB RAM/全网通） ', 1099, 5.3, 28, 'http://detail.zol.com.cn/cell_phone/index1208286.shtml', 1208286, 100);
-INSERT INTO `products` VALUES (10, '华为', '华为P10（VTR-AL00/全网通） ', 3488, 7.2, 395, 'http://detail.zol.com.cn/cell_phone/index1160028.shtml', 1160028, 100);
-INSERT INTO `products` VALUES (11, '华为', '华为畅享8 Plus（全网通） ', 1499, 5.8, 11, 'http://detail.zol.com.cn/cell_phone/index1210102.shtml', 1210102, 100);
-INSERT INTO `products` VALUES (12, '华为', '华为麦芒7（全网通） ', 2399, 7.6, 5, 'http://detail.zol.com.cn/cell_phone/index1227167.shtml', 1227167, 100);
-INSERT INTO `products` VALUES (13, '华为', '华为Mate 9（MHA-AL00/4GB RAM/全网通） ', 1788, 7.8, 449, 'http://detail.zol.com.cn/cell_phone/index1143413.shtml', 1143413, 100);
-INSERT INTO `products` VALUES (14, '华为', '华为nova 3i（6GB RAM/全网通） ', 2199, 7.0, 9, 'http://detail.zol.com.cn/cell_phone/index1224424.shtml', 1224424, 100);
-INSERT INTO `products` VALUES (15, '华为', '华为Mate RS保时捷版（全网通） ', 9999, 6.1, 16, 'http://detail.zol.com.cn/cell_phone/index1210089.shtml', 1210089, 100);
-INSERT INTO `products` VALUES (16, '华为', '华为nova 2（PIC-AL00/全网通） ', 1228, 8.0, 209, 'http://detail.zol.com.cn/cell_phone/index1170042.shtml', 1170042, 100);
-INSERT INTO `products` VALUES (17, '华为', '华为麦芒6（全网通） ', 2199, 6.1, 57, 'http://detail.zol.com.cn/cell_phone/index1182274.shtml', 1182274, 100);
-INSERT INTO `products` VALUES (18, '华为', '华为P9（EVA-AL00/标准版/全网通） ', 1448, 7.8, 648, 'http://detail.zol.com.cn/cell_phone/index404275.shtml', 404275, 100);
-INSERT INTO `products` VALUES (19, '华为', '华为nova（CAZ-AL10/高配版/全网通） ', 988, 6.9, 198, 'http://detail.zol.com.cn/cell_phone/index1154505.shtml', 1154505, 100);
-INSERT INTO `products` VALUES (20, '华为', '华为畅享8e（全网通） ', 999, 4.8, 4, 'http://detail.zol.com.cn/cell_phone/index1210103.shtml', 1210103, 100);
-INSERT INTO `products` VALUES (21, '华为', '华为麦芒5（MLA-AL10/高配版/全网通） ', 1099, 6.8, 136, 'http://detail.zol.com.cn/cell_phone/index1148829.shtml', 1148829, 100);
-INSERT INTO `products` VALUES (22, '华为', '华为P10 Plus（VKY-AL00/6GB RAM全网通） ', 2488, 7.5, 186, 'http://detail.zol.com.cn/cell_phone/index1163813.shtml', 1163813, 100);
-INSERT INTO `products` VALUES (23, '华为', '华为Mate 9 Pro（4GB RAM/全网通） ', 2799, 8.0, 136, 'http://detail.zol.com.cn/cell_phone/index1159578.shtml', 1159578, 100);
-INSERT INTO `products` VALUES (24, 'vivo', 'vivo X7 Plus（全网通） ', 2350, 8.2, 484, 'http://detail.zol.com.cn/cell_phone/index1147812.shtml', 1147812, NULL);
-INSERT INTO `products` VALUES (25, 'vivo', 'vivo X9s Plus（全网通） ', 2498, 7.4, 523, 'http://detail.zol.com.cn/cell_phone/index1170837.shtml', 1170837, NULL);
-INSERT INTO `products` VALUES (26, 'vivo', 'vivo Y51A（高配版/全网通） ', 998, 6.6, 306, 'http://detail.zol.com.cn/cell_phone/index1115625.shtml', 1115625, NULL);
-INSERT INTO `products` VALUES (27, 'vivo', 'vivo X7（全网通） ', 1799, 7.7, 736, 'http://detail.zol.com.cn/cell_phone/index1145877.shtml', 1145877, NULL);
-INSERT INTO `products` VALUES (28, 'vivo', 'vivo X9s（全网通） ', 1998, 8.9, 563, 'http://detail.zol.com.cn/cell_phone/index1174429.shtml', 1174429, NULL);
-INSERT INTO `products` VALUES (29, 'vivo', 'vivo Y66i（全网通） ', 1198, 6.3, 161, 'http://detail.zol.com.cn/cell_phone/index1204388.shtml', 1204388, NULL);
-INSERT INTO `products` VALUES (30, 'vivo', 'vivo X9s  L（移动全网通） ', 1998, 8.9, 563, 'http://detail.zol.com.cn/cell_phone/index1175257.shtml', 1175257, NULL);
-INSERT INTO `products` VALUES (31, 'vivo', 'vivo X9L（移动全网通）  ', 1998, 8.5, 1362, 'http://detail.zol.com.cn/cell_phone/index1170124.shtml', 1170124, NULL);
-INSERT INTO `products` VALUES (32, 'vivo', 'vivo X20Plus屏幕指纹版（全网通） ', 3598, 6.2, 17, 'http://detail.zol.com.cn/cell_phone/index1205808.shtml', 1205808, NULL);
-INSERT INTO `products` VALUES (33, 'vivo', 'vivo Y75（4GB RAM/全网通） ', 1098, 7.5, 27, 'http://detail.zol.com.cn/cell_phone/index1208237.shtml', 1208237, NULL);
-INSERT INTO `products` VALUES (34, 'vivo', 'vivo X20（旗舰版/全网通） ', 2598, 9.1, 1075, 'http://detail.zol.com.cn/cell_phone/index1184293.shtml', 1184293, NULL);
-INSERT INTO `products` VALUES (35, 'vivo', 'vivo Y55（全网通） ', 999, 6.4, 126, 'http://detail.zol.com.cn/cell_phone/index1156093.shtml', 1156093, NULL);
-INSERT INTO `products` VALUES (36, 'vivo', 'vivo Y75（3GB RAM/全网通） ', 1298, 7.5, 27, 'http://detail.zol.com.cn/cell_phone/index1185212.shtml', 1185212, NULL);
-INSERT INTO `products` VALUES (37, 'vivo', 'vivo Xplay6（全网通） ', 3498, 8.7, 691, 'http://detail.zol.com.cn/cell_phone/index1159623.shtml', 1159623, NULL);
-INSERT INTO `products` VALUES (38, 'OPPO', 'OPPO R17（8GB RAM/全网通） ', 3499, 9.5, 173, 'http://detail.zol.com.cn/cell_phone/index1225806.shtml', 1225806, 4);
-INSERT INTO `products` VALUES (39, 'OPPO', 'OPPO Find X（标准版/全网通） ', 4999, 9.5, 774, 'http://detail.zol.com.cn/cell_phone/index1213467.shtml', 1213467, 4);
-INSERT INTO `products` VALUES (40, 'OPPO', 'OPPO R15（6GB RAM/全网通） ', 2699, 9.2, 1055, 'http://detail.zol.com.cn/cell_phone/index1206990.shtml', 1206990, 4);
-INSERT INTO `products` VALUES (41, 'OPPO', 'OPPO A3（全网通） ', 1799, 8.9, 366, 'http://detail.zol.com.cn/cell_phone/index1211599.shtml', 1211599, 4);
-INSERT INTO `products` VALUES (42, 'OPPO', 'OPPO A5（全网通） ', 1500, 8.7, 357, 'http://detail.zol.com.cn/cell_phone/index1221126.shtml', 1221126, 4);
-INSERT INTO `products` VALUES (43, 'OPPO', 'OPPO R11（标准版/全网通） ', 1553, 9.1, 1346, 'http://detail.zol.com.cn/cell_phone/index1150077.shtml', 1150077, 4);
-INSERT INTO `products` VALUES (44, 'OPPO', 'OPPO A1（3GB RAM/全网通） ', 1000, 7.4, 86, 'http://detail.zol.com.cn/cell_phone/index1209829.shtml', 1209829, 4);
-INSERT INTO `products` VALUES (45, 'OPPO', 'OPPO Find X兰博基尼版（全网通） ', 9999, 9.7, 89, 'http://detail.zol.com.cn/cell_phone/index1220645.shtml', 1220645, 4);
-INSERT INTO `products` VALUES (46, 'OPPO', 'OPPO R17 Pro（全网通） ', 4299, 9.4, 91, 'http://detail.zol.com.cn/cell_phone/index1225826.shtml', 1225826, 4);
-INSERT INTO `products` VALUES (47, 'OPPO', 'OPPO A7x（全网通） ', 1999, 8.7, 48, 'http://detail.zol.com.cn/cell_phone/index1230724.shtml', 1230724, 4);
-INSERT INTO `products` VALUES (48, 'OPPO', 'OPPO R11s（4GB RAM/全网通） ', 2299, 9.2, 1310, 'http://detail.zol.com.cn/cell_phone/index1184068.shtml', 1184068, 4);
-INSERT INTO `products` VALUES (49, 'OPPO', 'OPPO A83 (全网通) ', 1199, 5.8, 38, 'http://detail.zol.com.cn/cell_phone/index1205003.shtml', 1205003, 4);
-INSERT INTO `products` VALUES (50, 'OPPO', 'OPPO A57（全网通） ', 799, 7.6, 577, 'http://detail.zol.com.cn/cell_phone/index1160598.shtml', 1160598, 4);
-INSERT INTO `products` VALUES (51, 'OPPO', 'OPPO A73（全网通） ', 1499, 8.4, 380, 'http://detail.zol.com.cn/cell_phone/index1205054.shtml', 1205054, 4);
-INSERT INTO `products` VALUES (52, 'OPPO', 'OPPO R17（雾光渐变色/8GB RAM/全网通） ', 3599, 9.5, 171, 'http://detail.zol.com.cn/cell_phone/index1229193.shtml', 1229193, 4);
-INSERT INTO `products` VALUES (53, 'OPPO', 'OPPO R11s Plus（全网通） ', 1899, 9.0, 669, 'http://detail.zol.com.cn/cell_phone/index1184231.shtml', 1184231, 4);
-INSERT INTO `products` VALUES (54, 'OPPO', 'OPPO R15梦镜版（梦境红/全网通） ', 2999, 9.2, 1032, 'http://detail.zol.com.cn/cell_phone/index1208720.shtml', 1208720, 4);
-INSERT INTO `products` VALUES (55, 'OPPO', 'OPPO R17（6GB RAM/全网通） ', 3199, 9.5, 171, 'http://detail.zol.com.cn/cell_phone/index1229159.shtml', 1229159, 4);
-INSERT INTO `products` VALUES (56, 'OPPO', 'OPPO R11 Plus（全网通） ', 1788, 9.2, 546, 'http://detail.zol.com.cn/cell_phone/index1170222.shtml', 1170222, 4);
-INSERT INTO `products` VALUES (57, 'OPPO', 'OPPO R15梦镜版（陶瓷黑/梦境紫/全网通） ', 3299, 9.2, 1032, 'http://detail.zol.com.cn/cell_phone/index1210656.shtml', 1210656, 4);
-INSERT INTO `products` VALUES (58, 'OPPO', 'OPPO A79（全网通） ', 1699, 8.7, 339, 'http://detail.zol.com.cn/cell_phone/index1203640.shtml', 1203640, 4);
-INSERT INTO `products` VALUES (59, '小米', '小米8（6GB RAM/全网通） ', 2599, 5.1, 308, 'http://detail.zol.com.cn/cell_phone/index1213787.shtml', 1213787, 3);
-INSERT INTO `products` VALUES (60, '小米', '小米6X（4GB RAM/全网通） ', 1349, 5.3, 106, 'http://detail.zol.com.cn/cell_phone/index1170480.shtml', 1170480, 3);
-INSERT INTO `products` VALUES (61, '小米', '小米8 SE（4GB RAM/全网通） ', 1699, 5.3, 76, 'http://detail.zol.com.cn/cell_phone/index1217453.shtml', 1217453, 3);
-INSERT INTO `products` VALUES (62, '小米', '小米8青春版（4GB RAM/全网通） ', 1399, 6.0, 18, 'http://detail.zol.com.cn/cell_phone/index1231048.shtml', 1231048, 3);
-INSERT INTO `products` VALUES (63, '小米', '小米红米Note 5（3GB RAM/全网通） ', 999, 5.5, 98, 'http://detail.zol.com.cn/cell_phone/index1175353.shtml', 1175353, 3);
-INSERT INTO `products` VALUES (64, '小米', '小米MIX 2s（6GB RAM/全网通） ', 2999, 5.6, 134, 'http://detail.zol.com.cn/cell_phone/index1202983.shtml', 1202983, 3);
-INSERT INTO `products` VALUES (65, '小米', '小米6（6GB RAM/全网通） ', 2409, 6.2, 526, 'http://detail.zol.com.cn/cell_phone/index1161066.shtml', 1161066, 3);
-INSERT INTO `products` VALUES (66, '小米', '小米红米6 Pro（3GB RAM/全网通） ', 969, 6.1, 21, 'http://detail.zol.com.cn/cell_phone/index1220665.shtml', 1220665, 3);
-INSERT INTO `products` VALUES (67, '小米', '小米8透明探索版（全网通） ', 3699, 5.4, 48, 'http://detail.zol.com.cn/cell_phone/index1216973.shtml', 1216973, 3);
-INSERT INTO `products` VALUES (68, '小米', '小米Max 3（4GB RAM/全网通） ', 1699, 5.1, 66, 'http://detail.zol.com.cn/cell_phone/index1205304.shtml', 1205304, 3);
-INSERT INTO `products` VALUES (69, '小米', '小米MIX 2（全网通） ', 2299, 5.4, 147, 'http://detail.zol.com.cn/cell_phone/index1160797.shtml', 1160797, 3);
-INSERT INTO `products` VALUES (70, '小米', '小米Max 2（全网通） ', 939, 6.2, 119, 'http://detail.zol.com.cn/cell_phone/index1165765.shtml', 1165765, 3);
-INSERT INTO `products` VALUES (71, '小米', '小米红米6（3GB RAM/全网通） ', 769, 5.4, 11, 'http://detail.zol.com.cn/cell_phone/index1215069.shtml', 1215069, 3);
-INSERT INTO `products` VALUES (72, '小米', '小米红米5 Plus（3GB RAM/全网通） ', 800, 5.8, 75, 'http://detail.zol.com.cn/cell_phone/index1183689.shtml', 1183689, 3);
-INSERT INTO `products` VALUES (73, '小米', '小米红米Note 5（4GB RAM/全网通） ', 1299, 5.5, 98, 'http://detail.zol.com.cn/cell_phone/index1209455.shtml', 1209455, 3);
-INSERT INTO `products` VALUES (74, '小米', '小米红米Note 4X（3GB RAM/全网通） ', 999, 5.7, 285, 'http://detail.zol.com.cn/cell_phone/index1163122.shtml', 1163122, 3);
-INSERT INTO `products` VALUES (75, '小米', '小米Note 3（6GB RAM/全网通） ', 1849, 5.8, 92, 'http://detail.zol.com.cn/cell_phone/index1164780.shtml', 1164780, 3);
-INSERT INTO `products` VALUES (76, '小米', '小米5X（全网通） ', 1129, 5.8, 98, 'http://detail.zol.com.cn/cell_phone/index1175015.shtml', 1175015, 3);
-INSERT INTO `products` VALUES (77, '小米', '小米红米6A（2GB RAM/全网通） ', 549, 6.1, 3, 'http://detail.zol.com.cn/cell_phone/index1216196.shtml', 1216196, 3);
-INSERT INTO `products` VALUES (78, '小米', '小米6X（6GB RAM/全网通） ', 1709, 5.3, 106, 'http://detail.zol.com.cn/cell_phone/index1212271.shtml', 1212271, 3);
-INSERT INTO `products` VALUES (79, '小米', '小米MIX（全网通） ', 2900, 5.3, 173, 'http://detail.zol.com.cn/cell_phone/index1158428.shtml', 1158428, 3);
-INSERT INTO `products` VALUES (80, '苹果', '苹果iPhone XS（全网通） ', 8699, 5.5, 51, 'http://detail.zol.com.cn/cell_phone/index1229519.shtml', 1229519, 2);
-INSERT INTO `products` VALUES (81, '苹果', '苹果iPhone X（全网通） ', 6898, 8.0, 193, 'http://detail.zol.com.cn/cell_phone/index1182639.shtml', 1182639, 2);
-INSERT INTO `products` VALUES (82, '苹果', '苹果iPhone XR（全网通） ', 6499, 4.6, 35, 'http://detail.zol.com.cn/cell_phone/index1205394.shtml', 1205394, 2);
-INSERT INTO `products` VALUES (83, '苹果', '苹果iPhone 8 Plus（全网通） ', 5468, 8.5, 84, 'http://detail.zol.com.cn/cell_phone/index1182632.shtml', 1182632, 2);
-INSERT INTO `products` VALUES (84, '苹果', '苹果iPhone XS Max（全网通） ', 9599, 5.8, 30, 'http://detail.zol.com.cn/cell_phone/index1229520.shtml', 1229520, 2);
-INSERT INTO `products` VALUES (85, '苹果', '苹果iPhone 8（全网通） ', 4528, 6.8, 254, 'http://detail.zol.com.cn/cell_phone/index394162.shtml', 394162, 2);
-INSERT INTO `products` VALUES (86, '苹果', '苹果iPhone 7（全网通） ', 3628, 8.0, 475, 'http://detail.zol.com.cn/cell_phone/index384973.shtml', 384973, 2);
-INSERT INTO `products` VALUES (87, '苹果', '苹果iPhone 7 Plus（全网通） ', 4499, 8.1, 335, 'http://detail.zol.com.cn/cell_phone/index1104332.shtml', 1104332, 2);
-INSERT INTO `products` VALUES (88, '苹果', '苹果iPhone 6S Plus（全网通） ', 3000, 8.0, 279, 'http://detail.zol.com.cn/cell_phone/index398690.shtml', 398690, 2);
-INSERT INTO `products` VALUES (89, '苹果', '苹果iPhone 5S（双4G） ', 1199, 8.2, 2964, 'http://detail.zol.com.cn/cell_phone/index340414.shtml', 340414, 2);
-INSERT INTO `products` VALUES (90, '苹果', '苹果iPhone 8 Plus（国际版/全网通） ', 5188, 8.5, 84, 'http://detail.zol.com.cn/cell_phone/index1204817.shtml', 1204817, 2);
-INSERT INTO `products` VALUES (91, '苹果', '苹果iPhone 7 Plus（双4G） ', 4388, 8.1, 335, 'http://detail.zol.com.cn/cell_phone/index1177080.shtml', 1177080, 2);
-INSERT INTO `products` VALUES (92, '苹果', '苹果iPhone 8（国际版/全网通） ', 4688, 6.8, 254, 'http://detail.zol.com.cn/cell_phone/index1204816.shtml', 1204816, 2);
-INSERT INTO `products` VALUES (93, '苹果', '苹果iPhone X（国际版/全网通） ', 6888, 8.0, 191, 'http://detail.zol.com.cn/cell_phone/index1204818.shtml', 1204818, 2);
-INSERT INTO `products` VALUES (94, '苹果', '苹果iPhone 7 Plus（国际版/全网通） ', 4749, 8.1, 335, 'http://detail.zol.com.cn/cell_phone/index1155434.shtml', 1155434, 2);
-INSERT INTO `products` VALUES (95, '苹果', '苹果iPhone 6S（国际版/双4G） ', 2320, 7.3, 551, 'http://detail.zol.com.cn/cell_phone/index1100448.shtml', 1100448, 2);
-INSERT INTO `products` VALUES (96, '锤子科技', '锤子科技坚果Pro 2S（4GB RAM/全网通） ', 1798, 6.3, 22, 'http://detail.zol.com.cn/cell_phone/index1227474.shtml', 1227474, NULL);
-INSERT INTO `products` VALUES (97, '锤子科技', '锤子科技坚果R1（6GB RAM/全网通） ', 3499, 5.1, 64, 'http://detail.zol.com.cn/cell_phone/index1162957.shtml', 1162957, NULL);
-INSERT INTO `products` VALUES (98, '锤子科技', '锤子科技坚果Pro 2（4GB RAM/全网通） ', 1399, 7.4, 85, 'http://detail.zol.com.cn/cell_phone/index1202624.shtml', 1202624, NULL);
-INSERT INTO `products` VALUES (99, '锤子科技', '锤子科技坚果3（全网通） ', 1099, 5.5, 42, 'http://detail.zol.com.cn/cell_phone/index1209757.shtml', 1209757, NULL);
-INSERT INTO `products` VALUES (100, '锤子科技', '锤子科技坚果Pro 2S（6GB RAM/全网通） ', 1998, 6.3, 22, 'http://detail.zol.com.cn/cell_phone/index1228692.shtml', 1228692, NULL);
-INSERT INTO `products` VALUES (101, '锤子科技', '锤子科技坚果Pro（64GB ROM/全网通） ', 1179, 7.3, 188, 'http://detail.zol.com.cn/cell_phone/index1166591.shtml', 1166591, NULL);
-INSERT INTO `products` VALUES (102, '锤子科技', '锤子科技坚果R1（8GB RAM/全网通） ', 4499, 5.1, 64, 'http://detail.zol.com.cn/cell_phone/index1214020.shtml', 1214020, NULL);
-INSERT INTO `products` VALUES (103, '锤子科技', '锤子科技坚果Pro 2特别版（全网通） ', 1449, 7.4, 85, 'http://detail.zol.com.cn/cell_phone/index1213907.shtml', 1213907, NULL);
-INSERT INTO `products` VALUES (104, '锤子科技', '锤子科技坚果Pro（128GB ROM/全网通） ', 1499, 7.3, 188, 'http://detail.zol.com.cn/cell_phone/index1170719.shtml', 1170719, NULL);
-INSERT INTO `products` VALUES (105, '锤子科技', '锤子科技坚果Pro 2（6GB RAM/全网通） ', 1949, 7.4, 85, 'http://detail.zol.com.cn/cell_phone/index1202737.shtml', 1202737, NULL);
-INSERT INTO `products` VALUES (106, '锤子科技', '锤子科技M1（全网通） ', 1800, 8.0, 148, 'http://detail.zol.com.cn/cell_phone/index1138532.shtml', 1138532, NULL);
-INSERT INTO `products` VALUES (107, '锤子科技', '锤子科技M1L（高配版/全网通） ', 2399, 8.0, 148, 'http://detail.zol.com.cn/cell_phone/index1157726.shtml', 1157726, NULL);
-INSERT INTO `products` VALUES (108, '锤子科技', '锤子科技坚果Pro（32GB ROM/全网通） ', 1099, 7.3, 188, 'http://detail.zol.com.cn/cell_phone/index1170718.shtml', 1170718, NULL);
-
--- ----------------------------
--- Table structure for students
--- ----------------------------
-DROP TABLE IF EXISTS `students`;
-CREATE TABLE `students`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `age` int(11) NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `oldPrice` int(255) NULL DEFAULT NULL,
+  `newPrice` int(255) NULL DEFAULT NULL,
+  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `status` int(1) NULL DEFAULT NULL,
+  `imgUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `inventoryCount` int(255) NULL DEFAULT NULL,
+  `saleCount` int(255) NULL DEFAULT NULL,
+  `favorCount` int(255) NULL DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `categoryId` int(255) NULL DEFAULT NULL,
+  `createAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updateAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 174 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of students
+-- Records of goods
 -- ----------------------------
-INSERT INTO `students` VALUES (1, 'why', 18);
-INSERT INTO `students` VALUES (2, 'tom', 22);
-INSERT INTO `students` VALUES (3, 'lilei', 25);
-INSERT INTO `students` VALUES (4, 'lucy', 16);
-INSERT INTO `students` VALUES (5, 'lily', 20);
+INSERT INTO `goods` VALUES (1, '吊带背心女夏2018秋季新款内搭吊带衫短款性感修身针织打底衫上衣显瘦', 43, 30, '吊带背心女夏2018秋季新款内搭吊带衫短款性感修身针织打底衫上衣显瘦', 1, 'http://s11.mogucdn.com/mlcdn/17f85e/180927_5i77e04lhaalbg3dai0j4588lbahh_640x960.jpg_560x999.jpg', 6285, 2, 3, '天津', 6, '2022-10-15 10:48:24', '2022-10-15 11:08:08');
+INSERT INTO `goods` VALUES (2, '2018秋季新款时尚套装蝴蝶结波点衬衫圆领麻花毛衣无袖马甲百褶半身裙中长款A字裙套装三件套', 86, 60, '2018秋季新款时尚套装蝴蝶结波点衬衫圆领麻花毛衣无袖马甲百褶半身裙中长款A字裙套装三件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180131_1kgh02j1j4lbb74g0427ljk976612_640x960.jpg_560x999.jpg', 4118, 1356, 311, '青岛', 8, '2022-10-15 10:48:24', '2022-10-15 11:08:08');
+INSERT INTO `goods` VALUES (3, '时尚套装韩版气质甜美镂空灯笼袖针织衫百搭显瘦毛衣女2018秋季新款连衣裙套装', 70, 70, '时尚套装韩版气质甜美镂空灯笼袖针织衫百搭显瘦毛衣女2018秋季新款连衣裙套装', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180822_5bl46cl4g934133a6cbhkk8l37hl0_640x960.jpg_560x999.jpg', 1615, 1360, 286, '沈阳', 3, '2022-10-15 10:48:24', '2022-10-15 11:08:08');
+INSERT INTO `goods` VALUES (4, '2018秋冬新款时尚韩范百搭显瘦背带裤套装灯芯绒裤子+毛衣两件套女', 99, 69, '2018秋冬新款时尚韩范百搭显瘦背带裤套装灯芯绒裤子+毛衣两件套女', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180831_3lccd4912aec0lb8fga9ji7ah6bkd_640x960.jpg_560x999.jpg', 4339, 1382, 55, '南京', 8, '2022-10-15 10:48:24', '2022-10-15 11:08:56');
+INSERT INTO `goods` VALUES (5, '2018秋装套装新款韩版百搭显瘦长袖条纹雪纺衬衫女宽松直筒背带裤套装两件套', 84, 59, '2018秋装套装新款韩版百搭显瘦长袖条纹雪纺衬衫女宽松直筒背带裤套装两件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180312_5ebi8i8k389leic0g487h3l611kek_640x960.jpg_560x999.jpg', 7966, 1384, 80, '西安', 3, '2022-10-15 10:48:24', '2022-10-15 11:08:58');
+INSERT INTO `goods` VALUES (6, '时尚套装两件套网红同款2018秋装女套装新款学生牛仔外套配内搭温柔风小黑裙黑色v领吊带裙潮', 100, 70, '时尚套装两件套网红同款2018秋装女套装新款学生牛仔外套配内搭温柔风小黑裙黑色v领吊带裙潮', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180819_44ee3hf251agika4lji8958i46e6d_640x960.jpg_560x999.jpg', 1281, 1404, 75, '青岛', 7, '2022-10-15 10:48:24', '2022-10-15 11:09:00');
+INSERT INTO `goods` VALUES (168, '连衣裙女新款2018秋款韩版小碎花裙子长袖文艺学生百搭小黑裙', 97, 68, '连衣裙女新款2018秋款韩版小碎花裙子长袖文艺学生百搭小黑裙', 1, 'http://s11.mogucdn.com/mlcdn/c45406/170402_06ehihjk325cjc7jc4653k1bkek2b_640x960.jpg_560x999.jpg', 7702, 1416, 441, '西安', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (167, '格姬2018秋装新款两件套圆领灯笼袖连衣裙春装新款韩版名媛大裙摆套装裙时尚套装女6254', 285, 199, '格姬2018秋装新款两件套圆领灯笼袖连衣裙春装新款韩版名媛大裙摆套装裙时尚套装女6254', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180302_4ji3hab7c3kdhfdg4i0lc86a1287h_640x960.jpg_560x999.jpg', 2455, 1416, 62, '南京', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (166, '秋装2018新款牛仔外套女韩版宽松短款针织背心高腰半身裙中长裙小个子显高时尚套装裙子三件套', 39, 27, '秋装2018新款牛仔外套女韩版宽松短款针织背心高腰半身裙中长裙小个子显高时尚套装裙子三件套', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180731_5be6jhh7ggj68d4063gkca4egh02i_750x1000.jpg_560x999.jpg', 7012, 1432, 103, '昆明', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (165, '2018秋装女装韩版新款休闲时尚套装女圆领条纹薄款上衣+高腰束脚灯笼裤两件套女潮', 198, 198, '2018秋装女装韩版新款休闲时尚套装女圆领条纹薄款上衣+高腰束脚灯笼裤两件套女潮', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180803_44ec95haiehdddjk126fgidfg52le_640x960.jpg_560x999.jpg', 1582, 1459, 13, '重庆', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (164, '2018秋装新款韩版宽松针织开衫毛衣外套中长气质v领针织连衣裙打底吊带裙两件套时尚裙子套装', 99, 69, '2018秋装新款韩版宽松针织开衫毛衣外套中长气质v领针织连衣裙打底吊带裙两件套时尚裙子套装', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180816_8gb546fel3dic1i6d44fj217l49eg_640x960.jpg_560x999.jpg', 8759, 1471, 64, '南京', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (162, '2018早秋新款港风时尚套装复古Polo领长袖衬衫温柔风无袖小个子吊带连衣裙两件套', 70, 49, '2018早秋新款港风时尚套装复古Polo领长袖衬衫温柔风无袖小个子吊带连衣裙两件套', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180820_2a2fja7ef28g254ki63cg6b3jkhgl_640x960.jpg_560x999.jpg', 8565, 1501, 13, '长沙', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (161, '2018秋季新款韩版小清新学生短款港味露脐长袖上衣女+百搭高腰束脚休闲长裤时尚套装两件套潮', 141, 99, '2018秋季新款韩版小清新学生短款港味露脐长袖上衣女+百搭高腰束脚休闲长裤时尚套装两件套潮', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180828_6g8gg6740942163ddi6hgeacj4983_640x960.jpg_560x999.jpg', 7445, 1511, 25, '深圳', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (160, '2018秋季新款韩版女装喇叭袖V领套头打底针织衫上衣+显瘦a字黑色半身裙皮裙两件套时尚套装', 84, 59, '2018秋季新款韩版女装喇叭袖V领套头打底针织衫上衣+显瘦a字黑色半身裙皮裙两件套时尚套装', 1, 'http://s3.mogucdn.com/mlcdn/c45406/170928_4hk375c1c1ldgl7bhi08e1hk23ji1_640x960.jpg_560x999.jpg', 6835, 1526, 807, '深圳', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (159, '格姬2018秋季新款港风休闲小西装套装女时尚OL两件套九分裤简约纯色休闲西服外套女6970', 256, 179, '格姬2018秋季新款港风休闲小西装套装女时尚OL两件套九分裤简约纯色休闲西服外套女6970', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180813_71b8h486f66358dal3hg12f90ba58_640x960.jpg_560x999.jpg', 1562, 1536, 34, '青岛', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (158, '2018秋装新款韩版宽松针织开衫毛衣外套上衣女修身显瘦吊带连衣裙两件套学生裙子时尚套装', 99, 69, '2018秋装新款韩版宽松针织开衫毛衣外套上衣女修身显瘦吊带连衣裙两件套学生裙子时尚套装', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180901_4lc505f9hgb86106k8cjcljj25294_640x960.jpg_560x999.jpg', 9382, 1569, 161, '深圳', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (157, '港风少女短款牛仔外套女2018新款韩版牛仔衣夹克潮+高腰流苏蛋糕裙半身裙女蕾丝短裙两件套装', 113, 79, '港风少女短款牛仔外套女2018新款韩版牛仔衣夹克潮+高腰流苏蛋糕裙半身裙女蕾丝短裙两件套装', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180723_827dgd0bdj5i4egcleje6j35eebbc_640x960.jpg_560x999.jpg', 10392, 1590, 71, '北京', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (156, '2018春秋新款韩版灯芯绒小脚哈伦裤女学生宽松萝卜裤显瘦九分裤休闲裤', 70, 49, '2018春秋新款韩版灯芯绒小脚哈伦裤女学生宽松萝卜裤显瘦九分裤休闲裤', 1, 'http://s11.mogucdn.com/mlcdn/c45406/171210_0a0kc9igaaf74jgcf1j150874daa3_640x960.jpg_560x999.jpg', 9430, 1599, 25, '郑州', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (154, '2018秋季新款百搭短款针织衫+宽松显瘦哈伦牛仔裤时尚两件套', 70, 49, '2018秋季新款百搭短款针织衫+宽松显瘦哈伦牛仔裤时尚两件套', 1, 'http://s3.mogucdn.com/mlcdn/55cf19/180828_4l2e9729iabakghcd44dkbe560h5b_640x960.jpg_560x999.jpg', 4999, 1665, 2, '杭州', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (153, '2018秋冬装新款韩版宽松学生过膝ulzzang鱼尾裙长裙潮卫衣连衣裙女', 140, 98, '2018秋冬装新款韩版宽松学生过膝ulzzang鱼尾裙长裙潮卫衣连衣裙女', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180801_4jjj34129ai4a0fd062iibj8ig5il_640x960.jpg_560x999.jpg', 9439, 1672, 31, '宁波', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (152, '2018秋季新款时尚套装宽松BF风学生格子长袖衬衫女上衣+韩版百搭学院风牛仔背带裤女两件套', 99, 69, '2018秋季新款时尚套装宽松BF风学生格子长袖衬衫女上衣+韩版百搭学院风牛仔背带裤女两件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180812_5ejaf15h8i9182c1765lbf6464d8h_640x960.jpg_560x999.jpg', 10060, 1673, 7, '杭州', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (151, '2018初秋新款BF港风网红学生复古小心机两件套装时尚女果绿宽松卫衣+休闲运动束脚裤子', 113, 79, '2018初秋新款BF港风网红学生复古小心机两件套装时尚女果绿宽松卫衣+休闲运动束脚裤子', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180802_686lie5edj192kc33ki737hle7d05_640x960.jpg_560x999.jpg', 8809, 1734, 18, '深圳', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (149, '时尚OL女神套装2018秋季新款新款简约百搭衬衫高腰时髦条纹哈伦裤两件套女', 140, 98, '时尚OL女神套装2018秋季新款新款简约百搭衬衫高腰时髦条纹哈伦裤两件套女', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180829_2kkjklb37965g608kk717ab0i7579_640x960.jpg_560x999.jpg', 9417, 1753, 61, '昆明', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (148, '格姬2018秋装新款高腰连衣裙女七分袖复古超仙少女冷淡风收腰纯色系带中长裙6990', 180, 126, '格姬2018秋装新款高腰连衣裙女七分袖复古超仙少女冷淡风收腰纯色系带中长裙6990', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180816_5ddih74k67e17k63ji6d621cc363h_640x960.jpg_560x999.jpg', 4873, 1759, 44, '郑州', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (147, '2018秋季新款韩版时尚套装百搭宽松连帽印花卫衣+高腰显瘦九分哈伦裤牛仔裤两件套潮', 99, 69, '2018秋季新款韩版时尚套装百搭宽松连帽印花卫衣+高腰显瘦九分哈伦裤牛仔裤两件套潮', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180819_036kb000jg39i651jbgf4kg5df084_640x960.jpg_560x999.jpg', 5285, 1778, 246, '杭州', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (146, '偏大大码秋装女套装新款2018中长款连帽卫衣+牛仔马甲洋气套装胖mm遮肉显瘦两件套省心搭配', 70, 49, '偏大大码秋装女套装新款2018中长款连帽卫衣+牛仔马甲洋气套装胖mm遮肉显瘦两件套省心搭配', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180821_7gccd889f8f88hde1kd4l99dj0h3e_640x960.jpg_560x999.jpg', 9978, 1801, 121, '西安', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (145, '2018秋季新款时尚套装韩版百搭个性拼色格纹套头连帽卫衣高腰显瘦休闲裤两件套', 99, 69, '2018秋季新款时尚套装韩版百搭个性拼色格纹套头连帽卫衣高腰显瘦休闲裤两件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180906_3d610k09hge16h62gg2h5h4fg2ali_640x960.jpg_560x999.jpg', 1607, 1810, 182, '宁波', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (144, '2018秋季新款韩版BF宽松百搭显瘦开衫女+短款吊带小背心+高腰A字半身裙三件套时尚套装', 184, 129, '2018秋季新款韩版BF宽松百搭显瘦开衫女+短款吊带小背心+高腰A字半身裙三件套时尚套装', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180831_2dch37fcaak900247525i548lh393_640x960.jpg_560x999.jpg', 7416, 1811, 22, '武汉', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (143, '2018秋季新款韩版时尚套装红格子长袖衬衫+百搭显瘦吊带针织连衣裙两件套女', 168, 79, '2018秋季新款韩版时尚套装红格子长袖衬衫+百搭显瘦吊带针织连衣裙两件套女', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180307_6c7j5el2b184dgcf244k8253cik56_640x832.jpg_560x999.jpg', 5297, 1881, 594, '北京', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (142, '定制2018秋季欧洲新款雪纺复古挂脖V领长袖衬衫中长款港味半身裙时尚套装女装', 101, 71, '定制2018秋季欧洲新款雪纺复古挂脖V领长袖衬衫中长款港味半身裙时尚套装女装', 1, 'http://s11.mogucdn.com/mlcdn/c45406/170907_2efhlkeke21efd84lf20e4kac70f1_1200x1800.jpg_560x999.jpg', 6530, 1914, 1617, '北京', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (141, '2018秋装新款韩版时尚套装chic暗红显白BF宽松显瘦冲锋衣外套+条杠休闲运动裤女两件套', 108, 76, '2018秋装新款韩版时尚套装chic暗红显白BF宽松显瘦冲锋衣外套+条杠休闲运动裤女两件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180819_2791931dhhb5h5bgik2cd6f4cc2ih_640x960.jpg_560x999.jpg', 4263, 1924, 44, '南京', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (140, '2018早秋新款时尚套装女甜美韩版长袖子镂空拼接纯色衬衫+宽松显瘦割破牛仔背带裤两件套女', 99, 69, '2018早秋新款时尚套装女甜美韩版长袖子镂空拼接纯色衬衫+宽松显瘦割破牛仔背带裤两件套女', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180714_3gca7b9e5bc5ab4ldd76bh3712f07_640x960.jpg_560x999.jpg', 3231, 1963, 24, '宁波', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (139, '2018秋季新款韩版加肥加大码休闲服运动套装女胖mm两件套套装', 69, 69, '2018秋季新款韩版加肥加大码休闲服运动套装女胖mm两件套套装', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180810_17b3h5lg77ijc21680f7gkl6ffd25_640x960.jpg_560x999.jpg', 5272, 1968, 3, '昆明', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (138, '秋季2018新款韩版毛边剪裁单排扣洗水牛仔外套抽绳连帽显瘦卫衣裙子秋装时尚套装两件套女装', 127, 89, '秋季2018新款韩版毛边剪裁单排扣洗水牛仔外套抽绳连帽显瘦卫衣裙子秋装时尚套装两件套女装', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180823_5ifd9g28613bi7c10jjk866ki2l32_640x960.jpg_560x999.jpg', 3241, 1972, 135, '西安', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (137, '时尚套装2018春季新款牛仔短款外套时尚外套气质上衣女+高腰显瘦直筒大口袋牛仔裤两件套', 70, 49, '时尚套装2018春季新款牛仔短款外套时尚外套气质上衣女+高腰显瘦直筒大口袋牛仔裤两件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180302_5e2jjb9cfkkfbkcb2hd8j02eef478_640x960.jpg_560x999.jpg', 8587, 2139, 477, '成都', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (136, '2018秋装新款时尚高领收腰显瘦针织连衣裙中长款毛衣裙长款', 414, 414, '2018秋装新款时尚高领收腰显瘦针织连衣裙中长款毛衣裙长款', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180816_3905kfkkfg63ja251869ljll7j93h_640x960.jpg_560x999.jpg', 9551, 2155, 10, '郑州', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (135, '2018秋季新款三件套韩版拼色针织开衫中长款毛衣外套+小清新格子衬衫+显瘦牛仔裤时尚套装', 84, 59, '2018秋季新款三件套韩版拼色针织开衫中长款毛衣外套+小清新格子衬衫+显瘦牛仔裤时尚套装', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180801_8filh47j1lh24a8a6500dj46ie597_640x854.jpg_560x999.jpg', 6126, 2194, 260, '宁波', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (134, '2018秋季新款时尚套装韩范宽松BF字母学院风工装风衣外套修身显瘦小脚裤套装两件套女', 71, 50, '2018秋季新款时尚套装韩范宽松BF字母学院风工装风衣外套修身显瘦小脚裤套装两件套女', 1, 'http://s3.mogucdn.com/p2/170210/176681490_7hac00i68kadaed0i6ba8l3le5dd3_640x960.jpg_560x999.jpg', 5449, 2280, 348, '沈阳', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (133, '晚晚风黑色连衣裙2018秋装新款女装韩版显瘦中长款V领A字裙赫本小黑裙气质百搭中长款连衣裙', 179, 69, '晚晚风黑色连衣裙2018秋装新款女装韩版显瘦中长款V领A字裙赫本小黑裙气质百搭中长款连衣裙', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180903_61lihh46bg9k4ej5ddia841338284_640x960.jpg_560x999.jpg', 10677, 2353, 113, '西安', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (132, '2018秋装女装韩版新款套装两件套时尚性感时尚套装上衣女+运动裤子套装女潮显瘦宽松', 198, 198, '2018秋装女装韩版新款套装两件套时尚性感时尚套装上衣女+运动裤子套装女潮显瘦宽松', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180826_5cf0l1745i7hl39dgeb3di3hc3af1_640x960.jpg_560x999.jpg', 6037, 2439, 27, '西安', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (131, '套装两件套2018初秋秋季新款长款薄款卫衣外套+高腰格子半身裙中长款打底裙网红套装', 86, 60, '套装两件套2018初秋秋季新款长款薄款卫衣外套+高腰格子半身裙中长款打底裙网红套装', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180729_02fl1g7c873825e5fhc76ba3h2505_640x960.jpg_560x999.jpg', 8330, 2448, 51, '杭州', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (130, '2018秋季新款时尚套装连帽卫衣女休闲针织运动裤套装两件套女', 99, 69, '2018秋季新款时尚套装连帽卫衣女休闲针织运动裤套装两件套女', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180103_6h04c282hf39913aje7434e1ie9c6_640x960.jpg_560x999.jpg', 6264, 2508, 836, '成都', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (129, '2018秋季新款韩版学院风长袖条纹上衣女高腰直筒牛仔背带裤衣裤时尚套装两件套', 70, 49, '2018秋季新款韩版学院风长袖条纹上衣女高腰直筒牛仔背带裤衣裤时尚套装两件套', 1, 'http://s3.mogucdn.com/mlcdn/55cf19/180902_77hklal614d182bl9725ad5gbfil2_640x960.jpg_560x999.jpg', 6003, 2515, 5, '昆明', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (128, '2018秋季新款时尚套装半透明雪纺衫V领破洞针织马甲呢子休闲裤套装三件套', 84, 59, '2018秋季新款时尚套装半透明雪纺衫V领破洞针织马甲呢子休闲裤套装三件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180120_1dl4a4dljdg8eclkef40kl1ke8g7k_640x960.jpg_560x999.jpg', 7483, 2520, 171, '深圳', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (127, '2018外套女秋季新款女装时尚套装女韩版中长款卫衣开衫外套高腰显瘦开叉小脚裤子套装两件套', 86, 60, '2018外套女秋季新款女装时尚套装女韩版中长款卫衣开衫外套高腰显瘦开叉小脚裤子套装两件套', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180109_85ee34ae6197i5k44ig69c1gd22ak_640x960.jpg_560x999.jpg', 7624, 3010, 1433, '郑州', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (125, '纯棉撞色条纹V领纯棉t恤女2018秋季新款韩版学生闺蜜装百搭修身显瘦长袖打底衫宽松上衣小衫', 64, 45, '纯棉撞色条纹V领纯棉t恤女2018秋季新款韩版学生闺蜜装百搭修身显瘦长袖打底衫宽松上衣小衫', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180808_61dc0ici7c6bbe65cii22c31513i6_640x960.jpg_560x999.jpg', 8355, 10, 14, '成都', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (124, '2018早秋季韩版百搭学生修身显瘦长袖t恤女秋冬新款原宿风圆领卡通刺绣纯棉打底衫上衣服体恤', 64, 45, '2018早秋季韩版百搭学生修身显瘦长袖t恤女秋冬新款原宿风圆领卡通刺绣纯棉打底衫上衣服体恤', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180821_2a6ek98i3jj902h50i7h7ekf0agj3_640x960.jpg_560x999.jpg', 3965, 3, 0, '杭州', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (123, '韩风chic上衣2018新款秋季韩版学院风日系软妹小清新拼色V领百搭长袖t恤卫衣女学生', 60, 60, '韩风chic上衣2018新款秋季韩版学院风日系软妹小清新拼色V领百搭长袖t恤卫衣女学生', 1, 'http://s3.mogucdn.com/mlcdn/55cf19/180923_8870522k681i85d2gfi1k6le1382e_640x960.jpg_560x999.jpg', 3264, 30, 1, '南京', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (122, '休闲运动服套装女春秋季2018新款韩版时尚大码宽松长袖卫衣三件套', 138, 138, '休闲运动服套装女春秋季2018新款韩版时尚大码宽松长袖卫衣三件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180807_3e09gg2fl5456hh9chli29d66j9ji_640x960.jpg_560x999.jpg', 10405, 3070, 8, '成都', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (121, '网红同款2018秋冬新款女装韩版气质时髦秋季chic风毛衣套装裙两件套时尚潮', 185, 130, '网红同款2018秋冬新款女装韩版气质时髦秋季chic风毛衣套装裙两件套时尚潮', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180802_1ec122l9ii2gj8l2fjck6f5f00eke_640x960.jpg_560x999.jpg', 3216, 3157, 21, '重庆', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (120, '秋季新款百搭学生闺蜜装V领长袖竹节棉t恤女2018秋冬韩版宽松显瘦纯色打底衫短款上衣服体恤', 64, 45, '秋季新款百搭学生闺蜜装V领长袖竹节棉t恤女2018秋冬韩版宽松显瘦纯色打底衫短款上衣服体恤', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180822_5d29k4j5g79jg043f591f6igbcdg6_640x960.jpg_560x999.jpg', 1885, 14, 12, '深圳', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (119, '秋冬新款V领撞色条纹长袖打底衫宽松短款上衣小衫2018秋季韩版百搭学生闺蜜装显瘦纯棉t恤女', 64, 45, '秋冬新款V领撞色条纹长袖打底衫宽松短款上衣小衫2018秋季韩版百搭学生闺蜜装显瘦纯棉t恤女', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180808_830ji849kbjbci113j19e11igkf44_640x960.jpg_560x999.jpg', 4156, 6, 9, '深圳', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (118, '2018外套女秋季新款女装时尚套装韩版拼色针织开衫中长款毛衣外套小清新格子衬衫牛仔裤三件套', 77, 54, '2018外套女秋季新款女装时尚套装韩版拼色针织开衫中长款毛衣外套小清新格子衬衫牛仔裤三件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180316_16k6dj8ff3ka9ci31djgj9999a985_640x960.jpg_560x999.jpg', 10416, 3254, 197, '深圳', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (117, '2018秋季新款格子衬衫女长袖韩版复古灯笼袖学生宽松泡泡袖大码娃娃衫B24', 99, 99, '2018秋季新款格子衬衫女长袖韩版复古灯笼袖学生宽松泡泡袖大码娃娃衫B24', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180803_7ed1i8bkhlgkdh733j724ed22a0fh_640x960.jpg_560x999.jpg', 5884, 3441, 78, '杭州', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (115, '2018秋装新款ins超火韩版女装微喇叭裤女九分裤高腰显瘦弹力微喇裤黑色薄款修身阔腿休闲裤', 108, 108, '2018秋装新款ins超火韩版女装微喇叭裤女九分裤高腰显瘦弹力微喇裤黑色薄款修身阔腿休闲裤', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180316_0l422k59b28kf6ef1h5i2j0g25ba8_1000x1498.jpg_560x999.jpg', 7369, 242, 3903, '深圳', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (114, '秋季2018新款百搭学生闺蜜装V领长袖条纹打底衫宽松上衣秋冬韩版修身显瘦短款纯棉t恤女小衫', 64, 45, '秋季2018新款百搭学生闺蜜装V领长袖条纹打底衫宽松上衣秋冬韩版修身显瘦短款纯棉t恤女小衫', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180807_43jj257hd8gd5g04605957la67f6j_640x960.jpg_560x999.jpg', 5007, 58, 95, '天津', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (113, '吊带背心女2018夏季新款内穿外穿打底背心裹胸韩版学生吊带打底衫', 43, 43, '吊带背心女2018夏季新款内穿外穿打底背心裹胸韩版学生吊带打底衫', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180927_245533i8jdjf722f654lee42ae12i_640x960.jpg_560x999.jpg', 9618, 0, 0, '武汉', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (112, '秋季2018新款韩版宽松开衫连帽长袖卫衣外套吊带裙背心裙显瘦连衣裙子时尚套装秋装两件套女装', 127, 89, '秋季2018新款韩版宽松开衫连帽长袖卫衣外套吊带裙背心裙显瘦连衣裙子时尚套装秋装两件套女装', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180827_8aa0ajci5142eic7lj870jlhe26gg_640x960.jpg_560x999.jpg', 10596, 3496, 148, '杭州', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (111, '2018秋季新款宽松中长款印花卫衣女+包臀开叉半身裙套装两件套', 84, 59, '2018秋季新款宽松中长款印花卫衣女+包臀开叉半身裙套装两件套', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180901_09l36d4lhdf10if8g5cl877df973j_640x960.jpg_560x999.jpg', 5612, 3575, 18, '天津', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (110, '秋季2018新款韩版条纹T恤女长袖宽松学生百搭小清新打底衫原宿风慵懒港味上衣服', 68, 68, '秋季2018新款韩版条纹T恤女长袖宽松学生百搭小清新打底衫原宿风慵懒港味上衣服', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180926_1j176fab5g21kd3ib9jlgj751dcgh_640x960.jpg_560x999.jpg', 9931, 0, 0, '重庆', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (109, '万年经典条纹上衣女装秋2018韩版新款宽松百搭显瘦拼色条纹长袖T恤女学生原宿慵懒风', 70, 70, '万年经典条纹上衣女装秋2018韩版新款宽松百搭显瘦拼色条纹长袖T恤女学生原宿慵懒风', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180926_7078259k7h0l2ihf67k2hc7ca79ic_640x960.jpg_560x999.jpg', 5224, 0, 0, '宁波', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (107, '2018秋季新款韩版女装字母印花宽松连帽休闲卫衣搭配松紧腰九分牛仔裤两件套女时尚运动套装潮', 97, 68, '2018秋季新款韩版女装字母印花宽松连帽休闲卫衣搭配松紧腰九分牛仔裤两件套女时尚运动套装潮', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180811_1k5hfa6d803575df3lkb6j67l5j3c_640x960.jpg_560x999.jpg', 3190, 3681, 76, '宁波', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (106, '2018春秋新款韩版胖mm加肥加大码200斤刺绣字母打底衫宽松显瘦长袖t恤上衣', 47, 47, '2018春秋新款韩版胖mm加肥加大码200斤刺绣字母打底衫宽松显瘦长袖t恤上衣', 1, 'http://s11.mogucdn.com/mlcdn/17f85e/180923_7b30c16he2lfdidb6e826kih8eaki_640x960.jpg_560x999.jpg', 6407, 0, 3, '长沙', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (105, '【秋冬加厚】灯芯绒2018新品百搭休闲裤女韩版毛呢裤子高腰显瘦宽松九分哈伦裤条纹大码小脚裤', 99, 55, '【秋冬加厚】灯芯绒2018新品百搭休闲裤女韩版毛呢裤子高腰显瘦宽松九分哈伦裤条纹大码小脚裤', 1, 'http://s11.mogucdn.com/mlcdn/17f85e/180926_76fee3df733b8h463gaj3lg6592bb_640x960.jpg_560x999.jpg', 7216, 192, 12, '杭州', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (104, '带帽运动服2018秋冬新款韩版时尚加厚刺绣金丝绒女士宽松休闲连帽运动服卫衣两件套潮', 129, 129, '带帽运动服2018秋冬新款韩版时尚加厚刺绣金丝绒女士宽松休闲连帽运动服卫衣两件套潮', 1, 'http://s3.mogucdn.com/mlcdn/55cf19/180923_3jbhe3i9907eii29bl70b07lkdkck_640x960.jpg_560x999.jpg', 2805, 0, 5, '深圳', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (103, '夏装2018新款韩版修身小吊带背心女学生显瘦内穿无袖打底衫上衣女', 43, 43, '夏装2018新款韩版修身小吊带背心女学生显瘦内穿无袖打底衫上衣女', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180927_23414d50hejlg647efd36j6j66jdl_640x960.jpg_560x999.jpg', 1521, 0, 0, '成都', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (102, '2018秋冬新款韩版宽松喇叭袖针织毛衣+时尚潮流黑色显瘦牛仔背带裤套装两件套', 99, 69, '2018秋冬新款韩版宽松喇叭袖针织毛衣+时尚潮流黑色显瘦牛仔背带裤套装两件套', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180901_2k0g5i06kcllef7jdehe9jd15kc2i_640x960.jpg_560x999.jpg', 10231, 3734, 91, '青岛', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (101, '秋季网红女时尚两件套2018新款晚晚风气质女神范针织港味套装裙子', 140, 98, '秋季网红女时尚两件套2018新款晚晚风气质女神范针织港味套装裙子', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180812_7dg023gflle285h71f1kf8gfi588i_640x960.jpg_560x999.jpg', 10366, 3806, 239, '广州', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (99, '2018夏季新款女装复古港味性感波点挂脖两穿学生打底抹胸小吊带背心女', 57, 57, '2018夏季新款女装复古港味性感波点挂脖两穿学生打底抹胸小吊带背心女', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180621_1h968hc9g2if464j0ld1fc0jc3492_640x960.jpg_560x999.jpg', 8964, 5, 27, '青岛', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (98, '时尚套装女2018秋冬新款百搭毛衣女+时尚宽松显瘦牛仔背带裤', 99, 69, '时尚套装女2018秋冬新款百搭毛衣女+时尚宽松显瘦牛仔背带裤', 1, 'http://s3.mogucdn.com/mlcdn/55cf19/180822_891ag27iicc1kl0fa93l0iddg45c3_640x960.jpg_560x999.jpg', 1648, 3890, 121, '宁波', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (97, '2018春秋季新款韩版百搭连帽卫衣+松紧腰长裤时尚运动套装两件套女学生', 57, 57, '2018春秋季新款韩版百搭连帽卫衣+松紧腰长裤时尚运动套装两件套女学生', 1, 'http://s3.mogucdn.com/mlcdn/c45406/170823_0d997dch3jkl8ed225ejbba76j2lf_640x832.jpg_560x999.jpg', 9970, 3904, 116, '上海', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (96, '加绒加厚裤子女秋冬2018新款学生韩版宽松显瘦休闲哈伦运动卫裤秋', 49, 49, '加绒加厚裤子女秋冬2018新款学生韩版宽松显瘦休闲哈伦运动卫裤秋', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180925_6bdiibf87e046d836dcjie5l40fk1_641x641.jpg_560x999.jpg', 10524, 1, 1, '沈阳', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (94, '2018新款半高领打底衫女装秋冬中领长袖t恤修身黑色纯棉紧身上衣', 85, 85, '2018新款半高领打底衫女装秋冬中领长袖t恤修身黑色纯棉紧身上衣', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180830_83cka4ghle20j90i5455j1i7li77k_640x960.jpg_560x999.jpg', 9218, 11, 14, '青岛', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (93, '2018秋新款飞鹰烫金印花字母纯棉潮牌情侣小脚裤男女同款', 226, 158, '2018秋新款飞鹰烫金印花字母纯棉潮牌情侣小脚裤男女同款', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180922_05jafg8g5k7flkj35icg400b0l4k7_800x1200.jpg_560x999.jpg', 8880, 12, 13, '北京', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (92, '2018韩版秋季新款学院风猫咪刺绣宽松显瘦牛仔背带裤+宽松织带条纹毛衣时尚衣裤套装女', 99, 69, '2018韩版秋季新款学院风猫咪刺绣宽松显瘦牛仔背带裤+宽松织带条纹毛衣时尚衣裤套装女', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180804_4l05750fhlbhhj1g6jb4075cife3l_640x960.jpg_560x999.jpg', 1147, 4058, 15, '西安', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (91, '2018秋季新款时尚套装韩版菱格针织开衫女宽松学生毛衣外套高腰休闲裤套装两件套', 99, 69, '2018秋季新款时尚套装韩版菱格针织开衫女宽松学生毛衣外套高腰休闲裤套装两件套', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180225_6i3kjj16b3g4c5fgb9a445l2bj5f0_640x960.jpg_560x999.jpg', 2804, 4141, 164, '上海', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (90, '复古黑白格子衬衫2018春季新款女装韩范宽松版百搭上衣软妹格纹衬衣', 71, 50, '复古黑白格子衬衫2018春季新款女装韩范宽松版百搭上衣软妹格纹衬衣', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180911_550eg3ghe4cgj89jk0lk19la32lf9_640x960.jpg_560x999.jpg', 3487, 17, 33, '青岛', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (89, '2018长袖t恤春秋季新款韩版怪味少女学生宽松显瘦嘻哈ins超火女生酷酷的上衣服潮', 40, 40, '2018长袖t恤春秋季新款韩版怪味少女学生宽松显瘦嘻哈ins超火女生酷酷的上衣服潮', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180823_4dgk20j7dgb5ef9abij8fd9aaah5a_640x960.jpg_560x999.jpg', 7715, 18, 70, '西安', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (88, '秋装女2018新款套装时尚晚晚风气质chic港味女神网红两件套装俏皮', 156, 109, '秋装女2018新款套装时尚晚晚风气质chic港味女神网红两件套装俏皮', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180827_1590j44g2bk619i6655ji20ihikfb_640x960.jpg_560x999.jpg', 3590, 4173, 167, '上海', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (87, '2018秋季新款时尚套装学院风V领小清新毛衣针织衫百搭格子衬衫显瘦小脚牛仔裤套装三件套', 84, 59, '2018秋季新款时尚套装学院风V领小清新毛衣针织衫百搭格子衬衫显瘦小脚牛仔裤套装三件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180226_3gg8h809bf7eg08gl0fl40b38e958_640x960.jpg_560x999.jpg', 6582, 4225, 194, '南京', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (86, '2018新款秋装白色长袖t恤女宽松韩版学生体恤百搭长袖上衣服', 57, 40, '2018新款秋装白色长袖t恤女宽松韩版学生体恤百搭长袖上衣服', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180809_00j78l8dakkgjkk2a3lgfeae1kgj1_640x960.jpg_560x999.jpg', 3597, 32, 42, '广州', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (85, '【2件69元】【新品特惠】短袖t恤女2018夏装新款韩版学生宽松黑色体恤圆领纯棉半袖上衣服', 70, 49, '【2件69元】【新品特惠】短袖t恤女2018夏装新款韩版学生宽松黑色体恤圆领纯棉半袖上衣服', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180301_784ej0g6c8dca24fa2c8dlfhe0fgc_640x960.jpg_560x999.jpg', 9215, 39, 1079, '宁波', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (84, '2018新款韩版纯棉V领条纹长袖体恤女装上衣服修身显瘦打底衫女式时尚T恤女生潮', 55, 38, '2018新款韩版纯棉V领条纹长袖体恤女装上衣服修身显瘦打底衫女式时尚T恤女生潮', 1, 'http://s3.mogucdn.com/mlcdn/17f85e/180830_3c8f1g7hka41603lfl25gh32b860i_640x960.jpg_560x999.jpg', 3850, 45, 291, '重庆', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (83, '裤子女阔腿裤春秋2018新款毛呢裤九分裤港味潮女裤甩腿裤女士裤子', 70, 70, '裤子女阔腿裤春秋2018新款毛呢裤九分裤港味潮女裤甩腿裤女士裤子', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180826_5708i53lg6ifcgd7402ieg99ab77b_640x640.jpg_560x999.jpg', 2414, 48, 134, '宁波', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (82, '2018外套女秋季新款女装时尚套装女韩版针织开衫毛衣外套格子衬衫直筒牛仔裤子套装三件套', 77, 54, '2018外套女秋季新款女装时尚套装女韩版针织开衫毛衣外套格子衬衫直筒牛仔裤子套装三件套', 1, 'http://s3.mogucdn.com/mlcdn/c45406/171224_57ldck1ki0bjh0fc48ac0e2f9i788_640x960.jpg_560x999.jpg', 2547, 4251, 1636, '重庆', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (81, '2018秋季新款时尚套装宽松海马毛毛衣女学院风百搭黑色牛仔背带裤两件套', 99, 69, '2018秋季新款时尚套装宽松海马毛毛衣女学院风百搭黑色牛仔背带裤两件套', 1, 'http://s3.mogucdn.com/mlcdn/55cf19/180903_2ahjib119c3433ehidb4lf7k9f9g3_640x960.jpg_560x999.jpg', 8757, 4362, 120, '武汉', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (79, '2018新款秋装女装上衣服原宿风百搭时尚胖妹妹姐妹装体恤衫韩版女学生闺蜜装大码简约印花t恤', 40, 40, '2018新款秋装女装上衣服原宿风百搭时尚胖妹妹姐妹装体恤衫韩版女学生闺蜜装大码简约印花t恤', 1, 'http://s3.mogucdn.com/mlcdn/55cf19/180823_657b62gkeca17eb91h6j9c8k1h8le_640x960.jpg_560x999.jpg', 8018, 59, 94, '西安', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (77, '运动套装女春秋韩版2018新款女装春装时髦休闲衣服薄款卫衣两件套', 79, 79, '运动套装女春秋韩版2018新款女装春装时髦休闲衣服薄款卫衣两件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180226_2hb2b3991i5kj050e4c9cfk985ab2_800x800.jpg_560x999.jpg', 2109, 4647, 21, '重庆', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (75, '黑色半高领打底衫女修身长袖上衣秋冬百搭中领纯棉秋衣2018春秋新款薄', 85, 60, '黑色半高领打底衫女修身长袖上衣秋冬百搭中领纯棉秋衣2018春秋新款薄', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180730_697eaeelf9g5e41j5f52b14ggej8f_640x960.jpg_560x999.jpg', 7644, 72, 77, '成都', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (74, '【59元2件】条纹纯棉运动短裤女2018春夏新款韩版宽松显瘦休闲裤学生跑步三分裤', 50, 35, '【59元2件】条纹纯棉运动短裤女2018春夏新款韩版宽松显瘦休闲裤学生跑步三分裤', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180522_21l7lb0acallifbl6d6ael74h45c3_640x960.jpg_560x999.jpg', 3228, 72, 88, '杭州', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (72, '2018秋季新款韩版百搭格子长袖衬衫+前短后长针织气质开衫外套+高腰直筒九分牛仔裤三件套装', 84, 59, '2018秋季新款韩版百搭格子长袖衬衫+前短后长针织气质开衫外套+高腰直筒九分牛仔裤三件套装', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180808_600abce0g8dc8i4f6ic7k27i7837l_640x960.jpg_560x999.jpg', 10195, 4886, 49, '杭州', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (70, '2件50元班服夏季t恤女短袖宽松学生情侣装夏装2018新款韩版ulzzang百搭衣服潮宽松', 40, 28, '2件50元班服夏季t恤女短袖宽松学生情侣装夏装2018新款韩版ulzzang百搭衣服潮宽松', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180416_359hjeljbc1djcf29db75b11j401c_640x960.jpg_560x999.jpg', 7193, 83, 450, '宁波', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (69, '【两件79元】半高领打底衫女2018新款秋冬白色加绒加厚紧身长袖t恤韩版ins超火的上衣', 49, 49, '【两件79元】半高领打底衫女2018新款秋冬白色加绒加厚紧身长袖t恤韩版ins超火的上衣', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180915_6d523b1i35c6873a212396j3c1652_800x800.jpg_560x999.jpg', 9009, 126, 85, '南京', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (66, '2018夏装新款高品质短袖t恤女纯棉圆领宽松显瘦韩版学生女装', 56, 39, '2018夏装新款高品质短袖t恤女纯棉圆领宽松显瘦韩版学生女装', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180305_2ljefab431fgach9g3b1gl72li11f_640x960.jpg_560x999.jpg', 8522, 93, 661, '沈阳', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (65, '2018夏季新款韩版丝绸粉色ins超火丝滑德芙束腿九分裤休闲运动裤女潮', 70, 49, '2018夏季新款韩版丝绸粉色ins超火丝滑德芙束腿九分裤休闲运动裤女潮', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180517_45lgaj2gf08h8egc4820ek82bi18i_640x960.jpg_560x999.jpg', 6077, 104, 430, '深圳', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (64, '春秋2018ins超火的新款韩版简约百搭宽松字母印花长袖T恤学生休闲体恤显瘦上衣潮', 40, 40, '春秋2018ins超火的新款韩版简约百搭宽松字母印花长袖T恤学生休闲体恤显瘦上衣潮', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180823_65bk4i19ff244if74226eeb4lchdc_640x960.jpg_560x999.jpg', 10261, 120, 320, '南京', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (62, '现货秒发~2018春秋新款套装条纹衬衫不规则拼接V领破马甲烟灰色铅笔小脚牛仔裤套装三件套', 99, 69, '现货秒发~2018春秋新款套装条纹衬衫不规则拼接V领破马甲烟灰色铅笔小脚牛仔裤套装三件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/170925_1kjjfb8iae7dcdjgc131l246bki3l_640x960.jpg_560x999.jpg', 1606, 5289, 1987, '成都', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (61, '2018新款秋装衬衫+收腰马甲+休闲裤名媛超火时尚套装女洋气三件套女J14', 157, 110, '2018新款秋装衬衫+收腰马甲+休闲裤名媛超火时尚套装女洋气三件套女J14', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180813_587cl37ikbj5ah47lbi0c098eehk4_640x960.jpg_560x999.jpg', 8709, 8079, 255, '上海', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (60, '2018秋冬新款网红性感欧根纱蝴蝶领结上衣+高腰显瘦半身皮裙2件套套装', 142, 99, '2018秋冬新款网红性感欧根纱蝴蝶领结上衣+高腰显瘦半身皮裙2件套套装', 1, 'http://s3.mogucdn.com/mlcdn/55cf19/180827_1l1278e9l144ih07kjdbk58ea0046_640x960.jpg_560x999.jpg', 3738, 135, 457, '郑州', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (59, '2018夏季新款纯色体恤韩版白色短袖T恤女百搭学生黑色宽松圆领上衣显瘦打底衫', 56, 39, '2018夏季新款纯色体恤韩版白色短袖T恤女百搭学生黑色宽松圆领上衣显瘦打底衫', 1, 'http://s3.mogucdn.com/p2/170310/89187459_176ced5dd1lk16ggeadh7j6i3hg8g_640x960.jpg_560x999.jpg', 4234, 158, 1125, '上海', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (57, '2018秋季新品韩范休闲宽松百搭牛仔外套气质显瘦中长款吊带连衣裙套装', 84, 59, '2018秋季新品韩范休闲宽松百搭牛仔外套气质显瘦中长款吊带连衣裙套装', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180901_60e7c737k66c4i5f7bj50l38c91ie_640x960.jpg_560x999.jpg', 2856, 8988, 166, '成都', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (55, '2018夏季新款紫色百搭款套头宽松学生T恤女上衣潮4色', 70, 49, '2018夏季新款紫色百搭款套头宽松学生T恤女上衣潮4色', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180611_8ahf5d6jh7gb9bjfll1f5bi33gil1_640x960.jpg_560x999.jpg', 3078, 198, 1238, '成都', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (54, '纯棉白色t恤女夏短袖修身短款半袖2018新款夏装紧身黑色体恤上衣长袖秋冬', 57, 40, '纯棉白色t恤女夏短袖修身短款半袖2018新款夏装紧身黑色体恤上衣长袖秋冬', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180925_17cd358662ffc9jhah6bf6bl99c75_640x960.jpg_560x999.jpg', 6659, 290, 535, '成都', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (53, '2018夏装新款修身显瘦性感拼色针织女短款韩版休闲打底衫上衣吊带背心', 43, 30, '2018夏装新款修身显瘦性感拼色针织女短款韩版休闲打底衫上衣吊带背心', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180605_25ah46f6e61dk43g22i3cf6dckcf6_640x960.jpg_560x999.jpg', 6615, 307, 740, '武汉', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (51, '实拍韩版2018秋冬新款学院风百搭高腰显瘦PU皮裙伞裙系带防走光显瘦半身裙短裙', 169, 59, '实拍韩版2018秋冬新款学院风百搭高腰显瘦PU皮裙伞裙系带防走光显瘦半身裙短裙', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180916_196h301k3fje7762dkhi5l6l99099_640x982.jpg_560x999.jpg', 1578, 9714, 9, '上海', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (50, '2018新款早春款韩版百搭宽松体恤刺绣字母圆领短袖T恤女学生上衣服洋气小衫', 57, 40, '2018新款早春款韩版百搭宽松体恤刺绣字母圆领短袖T恤女学生上衣服洋气小衫', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180416_4f73g9612ge2jja058g0gkhia406f_640x960.jpg_560x999.jpg', 4781, 335, 754, '广州', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (49, '【两件59元】【 降价啦！】2018夏装新款高品质纯棉t恤女短袖白色圆领宽松学生半袖上衣', 56, 39, '【两件59元】【 降价啦！】2018夏装新款高品质纯棉t恤女短袖白色圆领宽松学生半袖上衣', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180302_58kc4dk5820fj4ihjdh3e4k2b3h4e_640x960.jpg_560x999.jpg', 5642, 350, 5082, '重庆', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (48, '2018秋季新款韩范清新套装宽松圆领可爱学生条纹上衣配复古高腰直筒裤子破洞牛仔裤时尚两件套', 79, 55, '2018秋季新款韩范清新套装宽松圆领可爱学生条纹上衣配复古高腰直筒裤子破洞牛仔裤时尚两件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180901_024lb916jjb699j4dg56048e51jj6_640x960.jpg_560x999.jpg', 5298, 10152, 231, '重庆', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (47, '明星同款2018秋季新款韩版女装高腰裙子针织毛线百搭秋冬中长款显瘦A字半身裙', 169, 69, '明星同款2018秋季新款韩版女装高腰裙子针织毛线百搭秋冬中长款显瘦A字半身裙', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180916_7j0dh9d7a1dlac84bf3jebj39fil0_640x812.jpg_560x999.jpg', 6937, 11717, 232, '宁波', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (46, '2018春夏新款韩范长袖白色衬衫女百搭宽松中长款棉麻立领韩版打底衬衣', 70, 49, '2018春夏新款韩范长袖白色衬衫女百搭宽松中长款棉麻立领韩版打底衬衣', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180514_15272difihj7hg63gkakkg00hciaf_640x960.jpg_560x999.jpg', 7991, 377, 1167, '武汉', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (45, '2018春夏装新款上衣圆领休闲百搭韩版打底衫纯色白色棉t恤女短袖宽松学生半袖tee情侣男', 57, 40, '2018春夏装新款上衣圆领休闲百搭韩版打底衫纯色白色棉t恤女短袖宽松学生半袖tee情侣男', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180122_5dh2dl7862136dkcfh0haaalc3517_640x960.jpg_560x999.jpg', 10920, 423, 1185, '天津', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (44, '2018春夏新款女装宽松潮V领破洞镂空字母印花短袖T恤', 56, 39, '2018春夏新款女装宽松潮V领破洞镂空字母印花短袖T恤', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180514_1429jg0febkbdfk1ab3c8clah84cb_640x960.jpg_560x999.jpg', 2824, 443, 810, '天津', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (43, '宽松白色短袖T恤女韩版半袖上衣印花2018夏季女装新款班服ins时尚百搭学生衣服大码体恤', 43, 30, '宽松白色短袖T恤女韩版半袖上衣印花2018夏季女装新款班服ins时尚百搭学生衣服大码体恤', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180605_445c0g87j0k130ja2di46cj9403h7_800x1200.jpg_560x999.jpg', 2597, 483, 377, '西安', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (42, '珊珊2018秋装新款韩版百搭修身显瘦气质甜美荷叶边下摆初恋女裙蕾丝拼接长袖针织连衣裙', 155, 79, '珊珊2018秋装新款韩版百搭修身显瘦气质甜美荷叶边下摆初恋女裙蕾丝拼接长袖针织连衣裙', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180906_09ce0e8a14l71k3ll34dah14j80kd_640x960.jpg_560x999.jpg', 10766, 11984, 111, '西安', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (41, '早秋新款2018韩版ins超火港风条纹长袖雪纺衬衫气质百搭宽松显瘦chic上衣慵懒衬衣女潮', 150, 39, '早秋新款2018韩版ins超火港风条纹长袖雪纺衬衫气质百搭宽松显瘦chic上衣慵懒衬衣女潮', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180911_77hkba33lh2k52al9h406j8fl6ead_798x1197.jpg_560x999.jpg', 6708, 15609, 48, '沈阳', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (40, '2件50元qlz夏季2018情侣装新款宽松女韩版潮学生百搭网红同款短袖T恤上衣小哥哥印花', 40, 28, '2件50元qlz夏季2018情侣装新款宽松女韩版潮学生百搭网红同款短袖T恤上衣小哥哥印花', 1, 'http://s11.mogucdn.com/mlcdn/17f85e/180607_835hbfgcffaijjil95428cii1k9ef_640x960.jpg_560x999.jpg', 3160, 595, 1115, '天津', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (39, '2018夏装新款韩范t恤女短袖宽松百搭韩版学生半袖ins超火的上衣体侐潮', 50, 50, '2018夏装新款韩范t恤女短袖宽松百搭韩版学生半袖ins超火的上衣体侐潮', 1, 'http://s11.mogucdn.com/mlcdn/55cf19/180620_81idi257gjk9kl4i61bel5kak5362_640x960.jpg_560x999.jpg', 2165, 649, 969, '西安', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (38, '时尚套装两件套网红同款2018秋装女套装新款显瘦中长款字母印花宽松套头卫衣无敌修身打底长裤', 119, 84, '时尚套装两件套网红同款2018秋装女套装新款显瘦中长款字母印花宽松套头卫衣无敌修身打底长裤', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180914_1lj3hk5hek8266fdf77elg1h78fg8_640x960.jpg_560x999.jpg', 2507, 15999, 49, '南京', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (37, '秋装女卫衣套装新款2018韩版印花连帽卫衣上衣+显瘦高腰网纱半身裙学生裙子时尚套装两件套', 70, 49, '秋装女卫衣套装新款2018韩版印花连帽卫衣上衣+显瘦高腰网纱半身裙学生裙子时尚套装两件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180913_00b8bg3cg308c9jhcakhj0c7fhbih_640x960.jpg_560x999.jpg', 5660, 16428, 20, '重庆', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (36, '高领黑白条纹长袖t恤女2018春秋新款韩版宽松百搭学生内搭打底衫', 43, 30, '高领黑白条纹长袖t恤女2018春秋新款韩版宽松百搭学生内搭打底衫', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180126_39bjhej66kb2l48554kk0ld4d2fdc_640x960.jpg_560x999.jpg', 7708, 657, 4585, '长沙', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (35, '2018夏装新款韩范v领交叉粉色短袖T恤女装纯色半截袖小心机上衣', 57, 40, '2018夏装新款韩范v领交叉粉色短袖T恤女装纯色半截袖小心机上衣', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180620_19fk93bjc8adfg9h7ak978409kei9_640x960.jpg_560x999.jpg', 5864, 710, 1255, '北京', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (34, '雪纺阔腿裤女春夏高腰黑色韩版2018新款九分宽松显瘦度假沙滩裤裙', 70, 49, '雪纺阔腿裤女春夏高腰黑色韩版2018新款九分宽松显瘦度假沙滩裤裙', 1, 'http://s3.mogucdn.com/mlcdn/17f85e/180529_3bfb1bf04i91k9iaaj78ck4k4k814_640x960.jpg_560x999.jpg', 4174, 814, 1941, '成都', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (33, '2018新款女装秋装简约衬衫女长袖雪纺上衣百搭纯色韩范打底衬衣女', 80, 56, '2018新款女装秋装简约衬衫女长袖雪纺上衣百搭纯色韩范打底衬衣女', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180411_7ei8d3aabhkkg5b6312gh1ckak8f1_640x960.jpg_560x999.jpg', 2145, 958, 3203, '青岛', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (32, '2018新款时尚百搭黑色宽松机车皮夹克+网纱半身裙套装两件套', 226, 158, '2018新款时尚百搭黑色宽松机车皮夹克+网纱半身裙套装两件套', 1, 'http://s3.mogucdn.com/mlcdn/55cf19/180917_7e2fdc2d8131698jkg69c9586lkel_640x960.jpg_560x999.jpg', 1589, 16985, 28, '西安', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (31, '秋季新款套装两件套秋装2018新款韩版chic泡泡袖衬衫上衣+高腰显瘦牛仔裤学院风时尚套装', 69, 48, '秋季新款套装两件套秋装2018新款韩版chic泡泡袖衬衫上衣+高腰显瘦牛仔裤学院风时尚套装', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180910_72kcibhh4i275l73ik681kbed19aj_640x960.jpg_560x999.jpg', 5513, 17225, 2, '西安', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (30, '【时尚套装】2018秋款新款牛仔背带裙女夏吊带连衣裙搭配T恤新款小清新两件套女', 99, 69, '【时尚套装】2018秋款新款牛仔背带裙女夏吊带连衣裙搭配T恤新款小清新两件套女', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180821_044abj5e7h2icfgijb053661lle8f_800x800.jpg_560x999.jpg', 4166, 1136, 2517, '苏州', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (29, '送运费险短袖t恤女2018夏季新款女装韩版时尚气质百搭ulzzang学生百搭小心机纯色上衣', 57, 40, '送运费险短袖t恤女2018夏季新款女装韩版时尚气质百搭ulzzang学生百搭小心机纯色上衣', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180621_00e5i2711h0de8lhe4568kkie9d90_640x960.jpg_560x999.jpg', 10812, 1300, 2017, '郑州', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (28, '2018秋新款韩版时尚简约系带显瘦条纹系带西服套装女', 154, 108, '2018秋新款韩版时尚简约系带显瘦条纹系带西服套装女', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180815_7ff4fbk769cc2d1c2l494ie7j5jke_640x908.jpg_560x999.jpg', 10501, 17587, 22, '宁波', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (27, '中长款长袖连衣裙秋装新款2018韩版休闲胖mm大码女装裙子女学生宽松松垮垮中长款卫衣裙外套', 168, 54, '中长款长袖连衣裙秋装新款2018韩版休闲胖mm大码女装裙子女学生宽松松垮垮中长款卫衣裙外套', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180916_4di1ek7k3kha3klk02185678b025d_640x960.jpg_560x999.jpg', 7620, 19045, 156, '宁波', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (26, '2018春秋季新款女装韩版宽松短袖t恤女chic半袖打底条纹体恤上衣', 50, 35, '2018春秋季新款女装韩版宽松短袖t恤女chic半袖打底条纹体恤上衣', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180512_3e1962h3haa801048j1gi21024031_640x960.jpg_560x999.jpg', 3488, 1323, 1785, '宁波', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (24, '2018春秋季新款韩版原宿风闺蜜装圆领套头短袖t恤女中长款纯色百搭上衣宽松大码学生半袖体恤', 70, 49, '2018春秋季新款韩版原宿风闺蜜装圆领套头短袖t恤女中长款纯色百搭上衣宽松大码学生半袖体恤', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180514_104a5k2f09808h371j8b3h299e870_640x960.jpg_560x999.jpg', 4621, 1532, 3961, '宁波', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (23, '杨幂明星同款2018新款白色ins超火短袖t恤女字母宽松纯棉百搭上衣', 54, 37, '杨幂明星同款2018新款白色ins超火短袖t恤女字母宽松纯棉百搭上衣', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180624_6jb1g4kg6i1ab4i4g0echaia49i87_640x960.png_560x999.jpg', 7052, 1557, 1561, '沈阳', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (22, 'chic港味秋装女套装新款2018韩版格子西装外套+显瘦高腰破洞小脚裤学院风时尚套装两件套', 79, 55, 'chic港味秋装女套装新款2018韩版格子西装外套+显瘦高腰破洞小脚裤学院风时尚套装两件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180914_4k0k14g1608gc04k3jh1c6jac47fi_640x960.jpg_560x999.jpg', 4106, 19993, 173, '郑州', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (18, '2018秋冬新款ins超火针织时尚两件套小香风套装女', 154, 108, '2018秋冬新款ins超火针织时尚两件套小香风套装女', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180815_81dj3id2i70kfeh4eekd94k9ij0k4_640x913.jpg_560x999.jpg', 2729, 20288, 9, '重庆', 8, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (17, '网红同款实拍秋季女装2018新款女初恋复古中长款针织连衣裙半身裙时尚套装两件套', 369, 119, '网红同款实拍秋季女装2018新款女初恋复古中长款针织连衣裙半身裙时尚套装两件套', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180917_24666f4kgi486191382ikh2lhc8cg_640x862.jpg_560x999.jpg', 7956, 21355, 162, '武汉', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (16, '长袖/短袖T恤女2018新款棉质学生宽松韩版夏季可爱卡通猫咪印花纯色百搭打底衫上衣女潮', 52, 52, '长袖/短袖T恤女2018新款棉质学生宽松韩版夏季可爱卡通猫咪印花纯色百搭打底衫上衣女潮', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180423_54e410ebffkj73cah5e513584b5fb_800x800.jpg_560x999.jpg', 4835, 1856, 3658, '昆明', 4, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (15, '雪纺阔腿裤女夏2018新款裤子黑色韩版休闲裤女七分宽松直筒高腰秋冬秋季九分宽腿裤', 69, 48, '雪纺阔腿裤女夏2018新款裤子黑色韩版休闲裤女七分宽松直筒高腰秋冬秋季九分宽腿裤', 1, 'http://s3.mogucdn.com/mlcdn/17f85e/180902_1gd2jld5b1g6dfl57da4jdj07alac_640x960.jpg_560x999.jpg', 8517, 1984, 5041, '长沙', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (14, '2018春秋季韩版新款条纹外穿内搭上衣打底吊带百搭无袖T恤针织背心女', 41, 29, '2018春秋季韩版新款条纹外穿内搭上衣打底吊带百搭无袖T恤针织背心女', 1, 'http://s11.mogucdn.com/mlcdn/c45406/180521_5ijdcl888016gfaag2id2e0g8l19j_640x960.jpg_560x999.jpg', 6201, 2150, 10947, '西安', 5, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (13, '哈伦裤女秋季2018新款韩版学生显瘦雪纺薄款休闲裤女宽松黑色西装西裤九分裤夏小脚萝卜烟管裤', 69, 48, '哈伦裤女秋季2018新款韩版学生显瘦雪纺薄款休闲裤女宽松黑色西装西裤九分裤夏小脚萝卜烟管裤', 1, 'http://s11.mogucdn.com/mlcdn/17f85e/180902_2cefh0g12jk4i71bg270843d39l8j_640x960.jpg_560x999.jpg', 5825, 2191, 4040, '广州', 2, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (11, '时尚套装两件套2018韩版网红社会宽松连帽卫衣+高腰显瘦开叉半身裙学院风休闲秋装女套装新款', 199, 98, '时尚套装两件套2018韩版网红社会宽松连帽卫衣+高腰显瘦开叉半身裙学院风休闲秋装女套装新款', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180914_3aabiea9jgkj2a7hlgfie4011bljj_640x960.jpg_560x999.jpg', 1092, 23765, 276, '郑州', 6, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (8, '套装女春秋2018新款时尚复古气质个性连帽卫衣两件套', 211, 148, '套装女春秋2018新款时尚复古气质个性连帽卫衣两件套', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180825_4figj590flej05g556d6ll8ka09a7_640x902.jpg_560x999.jpg', 3703, 28990, 93, '南京', 3, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
+INSERT INTO `goods` VALUES (7, '秋装女2018新款早秋女装裙子韩版针织连衣裙+衬衫上衣时尚套装', 127, 89, '秋装女2018新款早秋女装裙子韩版针织连衣裙+衬衫上衣时尚套装', 1, 'http://s3.mogucdn.com/mlcdn/c45406/180828_550k23i82cbibh32602fl43jc9aid_800x1200.jpg_560x999.jpg', 4044, 32070, 179, '上海', 7, '2022-10-15 10:48:24', '2022-10-15 10:48:24');
 
 -- ----------------------------
--- Table structure for students_select_courses
+-- Table structure for menu
 -- ----------------------------
-DROP TABLE IF EXISTS `students_select_courses`;
-CREATE TABLE `students_select_courses`  (
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `menu`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `student_id` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `student_id`(`student_id`) USING BTREE,
-  INDEX `course_id`(`course_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Fixed;
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `type` int(11) NULL DEFAULT NULL,
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `sort` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `parentId` int(11) NULL DEFAULT NULL,
+  `permission` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `createAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updateAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 987 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of students_select_courses
+-- Records of menu
 -- ----------------------------
-INSERT INTO `students_select_courses` VALUES (17, 5, 4);
-INSERT INTO `students_select_courses` VALUES (16, 5, 3);
-INSERT INTO `students_select_courses` VALUES (15, 5, 2);
-INSERT INTO `students_select_courses` VALUES (14, 1, 4);
-INSERT INTO `students_select_courses` VALUES (13, 3, 2);
-INSERT INTO `students_select_courses` VALUES (12, 1, 4);
-INSERT INTO `students_select_courses` VALUES (11, 1, 3);
-INSERT INTO `students_select_courses` VALUES (10, 1, 1);
+INSERT INTO `menu` VALUES (9, '商品中心', 1, '/main/product', 'el-icon-goods', '3', 0, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (29, '查询角色', 3, NULL, '', NULL, 25, 'system:role:query', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (28, '修改角色', 3, NULL, '', NULL, 25, 'system:role:update', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (27, '删除角色', 3, NULL, '', NULL, 25, 'system:role:delete', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (26, '创建角色', 3, NULL, '', NULL, 25, 'system:role:create', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (25, '角色管理', 2, '/main/system/role', '', '102', 1, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (24, '查询菜单', 3, NULL, '', NULL, 4, 'system:menu:query', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (23, '修改菜单', 3, NULL, '', NULL, 4, 'system:menu:update', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (22, '删除菜单', 3, NULL, '', NULL, 4, 'system:menu:delete', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (21, '创建菜单', 3, NULL, '', NULL, 4, 'system:menu:create', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (4, '菜单管理', 2, '/main/system/menu', '', '103', 1, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (20, '查询部门', 3, NULL, '', NULL, 3, 'system:department:query', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (19, '修改部门', 3, NULL, '', NULL, 3, 'system:department:update', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (18, '删除部门', 3, NULL, '', NULL, 3, 'system:department:delete', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (17, '创建部门', 3, NULL, '', NULL, 3, 'system:department:create', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (3, '部门管理', 2, '/main/system/department', '', '101', 1, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (8, '查询用户', 3, NULL, '', NULL, 2, 'system:users:query', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (7, '修改用户', 3, NULL, '', NULL, 2, 'system:users:update', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (6, '删除用户', 3, NULL, '', NULL, 2, 'system:users:delete', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (5, '创建用户', 3, NULL, '', NULL, 2, 'system:users:create', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (2, '用户管理', 2, '/main/system/user', '', '100', 1, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (1, '系统管理', 1, '/main/system', 'el-icon-setting', '2', 0, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (40, '商品统计', 2, '/main/analysis/dashboard', '', '107', 38, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (39, '核心技术', 2, '/main/analysis/overview', '', '106', 38, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (38, '系统总览', 1, '/main/analysis', 'el-icon-monitor', '1', 0, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (15, '商品类别', 2, '/main/product/category', '', '104', 9, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (30, '创建类别', 3, NULL, '', NULL, 15, 'system:category:create', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (31, '删除类别', 3, NULL, '', NULL, 15, 'system:category:delete', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (32, '修改类别', 3, NULL, '', NULL, 15, 'system:category:update', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (33, '查询类别', 3, NULL, '', NULL, 15, 'system:category:query', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (16, '商品信息', 2, '/main/product/goods', '', '105', 9, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (34, '创建商品', 3, NULL, '', NULL, 16, 'system:goods:create', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (35, '删除商品', 3, NULL, '', NULL, 16, 'system:goods:delete', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (36, '修改商品', 3, NULL, '', NULL, 16, 'system:goods:update', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (37, '查询商品', 3, NULL, '', NULL, 16, 'system:goods:query', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (969, 'qweqw', 2, '/product/qwe', '', '104', 16, NULL, '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (986, '商品信息', 2, '/product/goods', '', '104', 9, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (41, '随便聊聊', 1, '/main/story', 'el-icon-chat-line-round', '4', 0, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (42, '你的故事', 2, '/main/story/chat', '', '108', 41, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (43, '故事列表', 2, '/main/story/list', '', '109', 41, '', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (10, '删除故事', 3, NULL, '', NULL, 43, 'system:story:delete', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (11, '修改故事', 3, NULL, '', NULL, 43, 'system:story:update', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+INSERT INTO `menu` VALUES (12, '查询故事', 3, NULL, '', NULL, 43, 'system:story:query', '2022-10-14 17:53:34', '2022-10-14 17:53:34');
+
+-- ----------------------------
+-- Table structure for role
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `intro` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `menuList` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `createAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updateAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+INSERT INTO `role` VALUES (4, '人事', '人事管理', '[38,39,40]', '2022-10-15 15:50:40', '2022-10-15 15:50:40');
+INSERT INTO `role` VALUES (3, '运营', '日常事务', '[38,39,40,1,3,19,20,4,21,22,23,24,25,26,27,28,29,9,15,31,32,33,16,36,37,41,42]', '2022-10-15 15:50:40', '2022-10-15 15:50:40');
+INSERT INTO `role` VALUES (1, '超级管理员', '所有权限', '[38,39,40,1,2,5,6,7,8,3,10,11,12,17,18,19,20,4,21,22,23,24,25,26,27,28,29,9,15,30,31,32,33,16,34,35,36,37,41,42,43]', '2022-10-15 15:50:40', '2022-10-18 09:17:22');
+
+-- ----------------------------
+-- Table structure for story
+-- ----------------------------
+DROP TABLE IF EXISTS `story`;
+CREATE TABLE `story`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `content` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `createAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updateAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of story
+-- ----------------------------
+INSERT INTO `story` VALUES (1, '编程语言', '我说错了，C语言才是最好的语言', '2020-11-24 18:22:54', '2022-10-17 19:22:56');
+INSERT INTO `story` VALUES (2, '标题', '曾几何时，他也好，她也好，都是这家伙的被害者。所以我才憎恶着。这个强求着所谓“大家”的世界。必须建立在牺牲某人之上才能成立的低劣的和平。以温柔和正义粉饰，明明是恶毒之物却登大雅之堂，随着时间的流逝越发凶恶，除欺瞒外别无其二的空虚的概念。过去和世界都是无法改变的。发生过的事情和所谓的“大家”都是无法改变的。但是，并不是说自己只能隶属于他们', '2020-11-24 18:27:42', '2022-10-17 19:23:04');
+INSERT INTO `story` VALUES (3, '标题', '不要告诉我你不需要保护，不要告诉我你不寂寞，知微，我只希望你，在走过黑夜的那个时辰，不要倔强的选择一个人。', '2020-11-24 18:27:42', '2022-10-17 19:23:04');
+INSERT INTO `story` VALUES (4, '标题', 'If you shed tears when you miss the sun, you also miss the stars.如果你因失去了太阳而流泪，那么你也将失去群星了。', '2020-11-24 18:27:42', '2022-10-17 19:23:05');
+INSERT INTO `story` VALUES (5, '标题', 'JavaScript 是世界上最好的语言', '2020-11-24 18:27:42', '2022-10-17 19:23:05');
+INSERT INTO `story` VALUES (6, '标题', '某一天，突然发现，许多结果都与路径无关。', '2020-11-24 18:27:42', '2022-10-17 19:23:06');
+INSERT INTO `story` VALUES (9, '标题', '一个人至少拥有一个梦想，有一个理由去坚强。心若没有栖息的地方，到哪里都是在流浪。', '2020-11-24 18:27:42', '2022-10-17 19:23:18');
+INSERT INTO `story` VALUES (10, '标题', '不乱于心，不困于情。不畏将来，不念过往。如此，安好。', '2020-11-24 18:27:42', '2022-10-17 19:23:19');
+INSERT INTO `story` VALUES (11, '标题', '如果你给我的，和你给别人的是一样的，那我就不要了。', '2020-11-24 18:27:42', '2022-10-17 19:23:20');
+INSERT INTO `story` VALUES (12, '标题', '故事的开头总是这样，适逢其会，猝不及防。故事的结局总是这样，花开两朵，天各一方。', '2020-11-24 18:27:42', '2022-10-17 19:23:21');
+INSERT INTO `story` VALUES (13, '标题', '你不愿意种花，你说，我不愿看见它一点点凋落。是的，为了避免结束，你避免了一切开始。', '2020-11-24 18:27:42', '2022-10-17 19:23:22');
+INSERT INTO `story` VALUES (14, '标题', '你如果认识从前的我，也许你会原谅现在的我。', '2020-11-24 18:27:42', '2022-10-17 19:23:22');
+INSERT INTO `story` VALUES (15, '标题', '每一个不曾起舞的日子，都是对生命的辜负。', '2020-11-24 18:27:42', '2022-10-17 19:23:23');
+INSERT INTO `story` VALUES (16, '标题', '向来缘浅，奈何情深。', '2020-11-24 18:27:42', '2022-10-17 19:23:24');
+INSERT INTO `story` VALUES (17, '标题', '心之所向 素履以往 生如逆旅 一苇以航', '2020-11-24 18:27:42', '2022-10-17 19:23:25');
+INSERT INTO `story` VALUES (18, '标题', '生如夏花之绚烂，死如秋叶之静美。', '2020-11-24 18:27:42', '2022-10-17 19:23:25');
+INSERT INTO `story` VALUES (19, '标题', '答案很长，我准备用一生的时间来回答，你准备要听了吗？', '2020-11-24 18:27:42', '2022-10-17 19:23:26');
+INSERT INTO `story` VALUES (20, '标题', '因为爱过，所以慈悲；因为懂得，所以宽容。', '2020-11-24 18:27:42', '2022-10-17 19:23:26');
+INSERT INTO `story` VALUES (21, '标题', '我们听过无数的道理，却仍旧过不好这一生。', '2020-11-24 18:27:42', '2022-10-17 19:23:27');
+INSERT INTO `story` VALUES (22, '标题', '我来不及认真地年轻，待明白过来时，只能选择认真地老去。', '2020-11-24 18:27:42', '2022-10-17 19:23:28');
+INSERT INTO `story` VALUES (23, '我与地坛', '宇宙以其不息的欲望将一个歌舞炼为永恒。这欲望有怎样一个人间的姓名，大可忽略不计。', '2022-10-17 19:30:00', '2022-10-17 19:30:00');
 
 -- ----------------------------
 -- Table structure for users
@@ -403,19 +412,21 @@ CREATE TABLE `users`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `createAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
-  `updateAt` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
-  `avatar_url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `realname` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `cellphone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `enable` int(1) NULL DEFAULT NULL,
+  `departmentId` int(11) NULL DEFAULT NULL,
+  `roleId` int(11) NULL DEFAULT NULL,
+  `createAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updateAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'coderwhy', 'e10adc3949ba59abbe56e057f20f883e', '2020-11-21 15:13:39', '2020-11-29 20:57:02', NULL);
-INSERT INTO `users` VALUES (2, 'lucy', 'e10adc3949ba59abbe56e057f20f883e', '2020-11-21 16:18:34', '2020-12-03 16:58:01', 'http://localhost:8000/users/2/avatar');
-INSERT INTO `users` VALUES (3, 'luck', 'e10adc3949ba59abbe56e057f20f883e', '2020-11-21 16:32:36', '2020-11-21 16:32:36', NULL);
-INSERT INTO `users` VALUES (4, 'kobe', 'e10adc3949ba59abbe56e057f20f883e', '2020-11-21 17:07:46', '2020-11-21 17:07:46', NULL);
+INSERT INTO `users` VALUES (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '13322223338', 1, 1, 1, '2022-10-17 19:35:27', '2022-10-18 09:23:24');
+INSERT INTO `users` VALUES (2, 'coderwhy', 'e10adc3949ba59abbe56e057f20f883e', 'coderwhy', '18812345678', 1, 1, 1, '2020-11-21 15:13:39', '2022-10-18 09:23:28');
 
 SET FOREIGN_KEY_CHECKS = 1;

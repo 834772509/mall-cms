@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "35839867-4e42-4ee3-b470-2e331d77115a",
-		"name": "coderhub",
+		"_postman_id": "fc138c25-b8a1-4138-a289-662a054ea463",
+		"name": "mall_cms",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "用户请求接口",
+			"name": "用户请求",
 			"item": [
 				{
 					"name": "用户注册接口",
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"kobe\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"name\": \"admin\",\r\n    \"realname\": \"admin\",\r\n    \"password\": \"admin\",\r\n    \"cellphone\": 13322223338,\r\n    \"departmentId\": 1,\r\n    \"roleId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -40,10 +40,10 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9a5f09b3-e587-4933-8e9b-3c13d03e4d61",
+								"id": "f9d5c743-2985-4f12-a9ff-00b0b8cd10af",
 								"exec": [
 									"const res = pm.response.json();\r",
-									"pm.globals.set(\"token\",res.token);"
+									"pm.globals.set(\"token\", res.data.token);"
 								],
 								"type": "text/javascript"
 							}
@@ -54,7 +54,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"lucy\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"name\": \"coderwhy\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -104,466 +104,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "用户动态接口",
-			"item": [
-				{
-					"name": "发布动态接口",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"aaaaaa\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/moment",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"moment"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "获取动态接口（单个）",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseURL}}/moment/1",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"moment",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "获取动态接口（列表）",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseURL}}/moment?offset=0&size=10",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"moment"
-							],
-							"query": [
-								{
-									"key": "offset",
-									"value": "0"
-								},
-								{
-									"key": "size",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "修改动态接口",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"JavaScript 是世界上最好的语言\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/moment/5",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"moment",
-								"5"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "删除动态接口",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"JavaScript 是世界上最好的语言\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/moment/7",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"moment",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "动态增加标签",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"labels\": [\"编程\",\"开发语言\",\"C语言\"]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/moment/5/labels",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"moment",
-								"5",
-								"labels"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "用户评论接口",
-			"item": [
-				{
-					"name": "发表评论接口",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"momentId\": 1,\r\n    \"content\": \"前端学习最重要的是HTML+CSS+JavaScript\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/comment",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"comment"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "回复评论接口",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"momentId\": 1,\r\n    \"content\": \"Vue、React也是非常重要~\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/comment/3/reply",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"comment",
-								"3",
-								"reply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "修改评论接口",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"momentId\": 1,\r\n    \"content\": \"我说错了，C语言才是最好的语言\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/comment/2",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"comment",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "删除评论接口",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{baseURL}}/comment/2",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"comment",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "获取评论接口",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseURL}}/comment?momentId=1",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"comment"
-							],
-							"query": [
-								{
-									"key": "momentId",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "标签数据接口",
-			"item": [
-				{
-					"name": "创建标签接口",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"青春\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/label",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"label"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "获取标签接口",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseURL}}/label?limit=10&offset=0",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"label"
-							],
-							"query": [
-								{
-									"key": "limit",
-									"value": "10"
-								},
-								{
-									"key": "offset",
-									"value": "0"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "上传图像接口",
+			"name": "上传图像",
 			"item": [
 				{
 					"name": "上传头像接口",
@@ -653,7 +194,1463 @@
 					"response": []
 				}
 			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "275e2c32-0d73-40a0-83c2-64cd21f7f006",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "879b7a15-5a2c-45c2-965a-9962e3d01ea5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "系统管理",
+			"item": [
+				{
+					"name": "用户管理",
+					"item": [
+						{
+							"name": "查询用户列表",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"offset\": 0,\n    \"size\": 10,\n    \"name\": \"w\",\n    \"cellphone\": 4\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/users/list",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"users",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "查询某个用户",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/users/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除用户",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/users/4",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"users",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "创建用户",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"james\",\n    \"realname\": \"詹姆斯\",\n    \"password\": \"123456\",\n    \"cellphone\": 13322223338,\n    \"departmentId\": 1,\n    \"roleId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改用户",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"12345\",\n    \"cellphone\": \"15566668888\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/users/3",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"users",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "部门管理",
+					"item": [
+						{
+							"name": "获取部门列表",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"人事部\",\n    \"lily\": \"lily\",\n    \"offset\": 0,\n    \"size\": 20\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/department/list",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"department",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取某个部门",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/department/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"department",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "创建部门",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"营销部\",\n    \"parentId\": 1,\n    \"leader\": \"coderwhy\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/department",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"department"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除部门",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/department/11",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"department",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "更新部门",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"leader\": \"lily\",\n    \"parentId\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/department/4",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"department",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "角色管理",
+					"item": [
+						{
+							"name": "创建角色",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"运营2\",\n    \"intro\": \"日常管理2\",\n    \"menuList\": [1, 9, 38, 41, 2, 3, 4, 25, 5, 6, 7, 8, 17, 18, 19, 20, 21, 22, 23, 24, 15, 16, 30, 31, 32, 33, 34, 35, 36, 37, 26, 27, 28, 29, 39, 40, 42, 43]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/role",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"role"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除角色",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/role/2",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"role",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "更新角色",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"intro\": \"日常事务\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/role/3",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"role",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取某个角色",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/role/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"role",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取角色列表",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"offset\": 0,\n    \"size\": 100\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/role/list",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"role",
+										"list"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "菜单管理",
+					"item": [
+						{
+							"name": "创建菜单",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"商品信息\",\n    \"type\": 2,\n    \"url\": \"/product/goods\",\n    \"sort\": 104,\n    \"parentId\": 9\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/menu",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"menu"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除菜单",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/menu/43",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"menu",
+										"43"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改菜单",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"test测试\",\n    \"url\": \"/demo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/menu/43",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"menu",
+										"43"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "查询某个菜单",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/menu/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"menu",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "查询菜单列表",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/menu/list",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"menu",
+										"list"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "商品管理",
+			"item": [
+				{
+					"name": "商品信息",
+					"item": [
+						{
+							"name": "创建商品",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"aaa\",\n    \"oldPrice\": 100,\n    \"newPrice\": 88,\n    \"desc\": \"cba\",\n    \"status\": 1,\n    \"imgUrl\": \"www.itsiyuan.com/abc.png\",\n    \"inventoryCount\": 100,\n    \"saleCount\": 100,\n    \"favorCount\": 199,\n    \"address\": \"北京\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/goods",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"goods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除商品",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/goods/282",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"goods",
+										"282"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改商品",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"code\",\n    \"newPrice\": 90\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/goods/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"goods",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取单个商品",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/goods/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"goods",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取商品列表",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/goods/list",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"goods",
+										"list"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "商品分类",
+					"item": [
+						{
+							"name": "创建类别",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"床上用品\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/category",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除类别",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/category/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "更新类别",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"生活用品\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/category/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取单个类别",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/category/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取类别列表",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"offset\": 0,\n    \"size\": 3,\n    \"name\": \"子\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/category/list",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"category",
+										"list"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "图表数据",
+			"item": [
+				{
+					"name": "每个分类商品的个数",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/goods/category/count",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"goods",
+								"category",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "每个分类商品的销量",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/goods/category/sale",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"goods",
+								"category",
+								"sale"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "每个分类商品的收藏",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/goods/category/favor",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"goods",
+								"category",
+								"favor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "销量前10的商品数量",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL2}}/goods/sale/top10",
+							"host": [
+								"{{baseURL2}}"
+							],
+							"path": [
+								"goods",
+								"sale",
+								"top10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "不同城市的销量数据",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/goods/address/sale",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"goods",
+								"address",
+								"sale"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "商品数据统计的数量",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/goods/amount/list",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"goods",
+								"amount",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "故事杂谈",
+			"item": [
+				{
+					"name": "你的故事",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"我与地坛\",\n    \"content\": \"宇宙以其不息的欲望将一个歌舞炼为永恒。这欲望有怎样一个人间的姓名，大可忽略不计。\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/story",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"story"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "故事列表",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/story/list",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"story",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "高级查询",
+			"item": [
+				{
+					"name": "查询完整菜单树",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/menu/list",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"menu",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询角色菜单树",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/role/4/menu",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"role",
+								"4",
+								"menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询角色菜单ids",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/role/4/menuIds",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"role",
+								"4",
+								"menuIds"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "823be587-1845-4ca4-acec-867d465f324b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a80c372b-3cae-455f-8778-4a4f99c152ff",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "546afd3d-77a9-4aab-95c7-674b45ae8e4e",
+			"key": "baseURL",
+			"value": "http://localhost:8000"
+		},
+		{
+			"id": "baf7bd95-a9be-4d12-8ba0-765dbdf5aa62",
+			"value": ""
 		}
 	],
 	"protocolProfileBehavior": {}

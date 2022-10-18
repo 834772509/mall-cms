@@ -36,7 +36,6 @@ const verifyLogin = async (ctx, next) => {
   await next();
 };
 
-// 授权验证
 const verifyAuth = async (ctx, next) => {
   console.log("验证授权的middleware");
   // 获取token

@@ -1,6 +1,5 @@
 const mysql = require("mysql2");
 const config = require("./config");
-const initDatabase = require("../service/init");
 
 const connections = mysql.createPool({
   host: config.MYSQL_HTOST,
@@ -22,7 +21,6 @@ connections.getConnection((err, conn) => {
       return;
     } else {
       console.log("数据库连接成功");
-      initDatabase(connections.promise());
     }
   });
 });
