@@ -1,19 +1,28 @@
 const connection = require("../app/database");
+const departmentService = require("../service/department-service");
+const roleService = require("../service/role-service");
 
 class UserService {
   async create(user) {
-    const { name, password } = user;
+    const { name, realname, password, cellphone, departmentId, roleId } = user;
 
     // 将user存储到数据库中
-    const statement = `INSERT INTO users(name,password) VALUES (?,?);`;
-    const rusult = await connection.execute(statement, [name, password]);
+    const statement = `INSERT INTO users(name, realname, password, cellphone, departmentId, roleId) VALUES (?, ?, ?, ?, ?, ?)`;
+    const rusult = await connection.execute(statement, [
+      name,
+      realname,
+      password,
+      cellphone,
+      departmentId,
+      roleId,
+    ]);
     return rusult[0];
   }
 
   /**
    * 获取所有用户列表
    */
-  async getUserList() {
+  async list() {
     const statement = `SELECT * FROM users`;
     const result = await connection.execute(statement, []);
     return result[0];
@@ -36,6 +45,17 @@ class UserService {
   async getUserByID(id) {
     const statement = `SELECT * FROM users WHERE id = ?`;
     const result = await connection.execute(statement, [id]);
+
+    for (let index = 0; index < result[0].length; index++) {
+      const user = result[0][index];
+      const { departmentId, roleId } = user;
+      const departmentResult = await departmentService.getDepartmentById(
+        departmentId
+      );
+      const roleResult = await roleService.getRoleById(roleId);
+      result[0][index]["department"] = departmentResult[0];
+      result[0][index]["role"] = roleResult[0];
+    }
     return result[0];
   }
 
@@ -48,6 +68,15 @@ class UserService {
     const statement = `UPDATE users SET avatar_url = ? WHERE id = ?;`;
     const result = await connection.execute(statement, [avatarURL, id]);
     return result;
+  }
+
+  /**
+   * 删除用户
+   */
+  async remove(userId) {
+    const statement = `DELETE FROM users WHERE id = ?`;
+    const result = await connection.execute(statement, [userId]);
+    return result[0];
   }
 }
 

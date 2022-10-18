@@ -13,12 +13,15 @@ class UserController {
     const result = await userService.create(user);
 
     // 返回数据
-    ctx.body = { code: 0, data: result };
+    ctx.body = {
+      code: 0,
+      data: result.affectedRows != 0 ? "创建用户成功~" : "创建用户失败~",
+    };
   }
 
   // 查询用户列表
   async list(ctx, next) {
-    const result = await userService.getUserList();
+    const result = await userService.list();
     ctx.body = { code: 0, data: { list: result, totalCount: result.length } };
   }
 
@@ -26,8 +29,7 @@ class UserController {
   async userInfo(ctx, next) {
     const { userId } = ctx.params;
     const result = await userService.getUserByID(userId);
-
-    ctx.body = { code: 0, data: { result, role: {}, department: {} } };
+    ctx.body = { code: 0, data: result[0] };
   }
 
   // 查询用户头像
@@ -37,6 +39,19 @@ class UserController {
     // 返回头像信息
     ctx.response.set("content-type", avatarInfo.mimetype);
     ctx.body = fs.createReadStream(`${AVATAR_PATH}/${avatarInfo.filename}`);
+  }
+
+  // 编辑用户信息
+  async update(ctx, next) {}
+
+  // 删除用户
+  async remove(ctx, next) {
+    const { userId } = ctx.params;
+    const result = await userService.remove(userId);
+    ctx.body = {
+      code: 0,
+      data: result.affectedRows != 0 ? "删除用户成功~" : "删除用户失败~",
+    };
   }
 }
 
