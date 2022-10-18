@@ -1,23 +1,26 @@
 /**
- * 获取菜单列表树
+ * 将菜单列表转换为树结构列表
+ * @param {Array} menuList 菜单列表
+ * @returns
  */
-const getMenuTreeList = (treeData, id, list) => {
-  for (const item of treeData) {
-    if (item.parentId === id) {
-      list.push(item);
+const getMenuTreeList = (menuList) => {
+  // 将全部的permissionId作为对象的key重组成一个对象
+  let formatObj = menuList.reduce((pre, cur) => {
+    return { ...pre, [cur["id"]]: cur };
+  }, {});
+
+  let formatArray = menuList.reduce((arr, cur) => {
+    let parentId = cur.parentId ? cur.parentId : 0;
+    let parent = formatObj[parentId];
+    if (parent) {
+      parent.children ? parent.children.push(cur) : (parent.children = [cur]);
+    } else {
+      arr.push(cur);
     }
-  }
-  createChildren(treeData, list);
-  return list;
-};
-const createChildren = (treeData, list) => {
-  for (const i of list) {
-    i.children = [];
-    getMenuTreeList(treeData, i.id, i.children);
-    if (i.children.length === 0) {
-      delete i.children;
-    }
-  }
+    return arr;
+  }, []);
+
+  return formatArray;
 };
 
 module.exports = { getMenuTreeList };

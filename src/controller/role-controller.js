@@ -1,4 +1,6 @@
 const roleService = require("../service/role-service");
+const menuService = require("../service/menu-service");
+const { getMenuTreeList } = require("../utils/utils");
 
 // 角色模块
 class RoleController {
@@ -35,6 +37,28 @@ class RoleController {
 
   // 获取某个角色信息
   async detail(ctx, next) {
+    const { roleId } = ctx.params;
+    const result = await roleService.getRoleById(roleId);
+    ctx.body = { code: 0, data: result[0] };
+  }
+
+  // 查询角色菜单树
+  async menu(ctx, next) {
+    const { roleId } = ctx.params;
+    const result = await roleService.getRoleById(roleId);
+
+    const menuInfoList = [];
+    // 获取角色菜单列表
+    const menuIdList = JSON.parse(result[0]["menuList"]);
+    for (const id of menuIdList) {
+      const menuInfo = await menuService.getMenuById(id);
+      menuInfoList.push(menuInfo[0]);
+    }
+    ctx.body = { code: 0, data: getMenuTreeList(menuInfoList) };
+  }
+
+  // 查询角色菜单ids
+  async menuIds(ctx, next) {
     const { roleId } = ctx.params;
     const result = await roleService.getRoleById(roleId);
     ctx.body = { code: 0, data: result[0] };

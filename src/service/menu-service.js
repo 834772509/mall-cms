@@ -36,7 +36,7 @@ class menuService {
   async list() {
     const statement = `SELECT * FROM menu`;
     const result = await connection.execute(statement, []);
-    const res = getMenuTreeList(result[0], 0, []);
+    const res = getMenuTreeList(result[0]);
     return [res];
   }
 

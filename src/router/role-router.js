@@ -4,6 +4,8 @@ const {
   create,
   list,
   detail,
+  menu,
+  menuIds,
   update,
   remove,
 } = require("../controller/role-controller");
@@ -16,6 +18,10 @@ roleRouter.post("/", verifyAuth, create);
 roleRouter.post("/list", verifyAuth, list);
 // 获取某个角色信息
 roleRouter.get("/:roleId", verifyAuth, detail);
+// 查询角色菜单树
+roleRouter.get("/:roleId/menu", verifyAuth, menu);
+// 查询角色菜单ids
+roleRouter.get("/:roleId/menuIds", verifyAuth, menuIds);
 // 更新角色信息
 roleRouter.patch("/:roleId", verifyAuth, update);
 // 删除角色
